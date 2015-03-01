@@ -1,0 +1,16 @@
+{% extends 'twig/base.twig' %}
+ 
+{% block content %}
+ 
+		<!-- start the loop -->
+		{% for post in posts %}
+				
+			{{ include( 'twig/content.twig', ignore_missing = true ) }}
+ 
+		{% else %}		
+		
+			{{ include( 'twig/404.twig' ) }}
+ 
+		{% endfor %}
+		
+{% endblock %}

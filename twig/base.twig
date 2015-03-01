@@ -1,0 +1,9 @@
+{{function('get_header')}}
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div id="sidebar">
+        {{function('get_sidebar')}}
+    </div>
+{{function('get_footer')}}
