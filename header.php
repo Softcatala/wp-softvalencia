@@ -41,7 +41,7 @@
 
 	if(is_traductor()) {
 
-	        echo '<script type="text/javascript" src="/wp-content/themes/vesper/traductor.js"></script>';
+	        echo '<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/traductor.js"></script>';
                 echo '<meta name="keywords" content="traductor, valencià, castellà, traductor, valenciano, castellano, catalán, català, francés, francès, portuguès, portugués" />';
 	}
 
@@ -67,7 +67,7 @@
 
 			<div class="sidebar_home">
 
-			<div class="logo_cap"><a href="/"><img src="/wp-content/themes/vesper/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
+			<div class="logo_cap"><a href="/"><img src="/wp-content/themes/wp-softvalencia/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
 
 			</div>
 

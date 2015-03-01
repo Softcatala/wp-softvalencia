@@ -6,7 +6,7 @@
 
 <p>Si no s'indica el contrari, el contingut text es troba disponible sota els termes d'una llicència <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.ca">Atribució - CompartirIgual 3.0</a></p>
 
-<div id="logospeu">El lloc web de <strong>Softvalencià</strong> funciona gràcies a <a href="http://ca.wordpress.org"><img src="/imatges/wordpress.png" alt="WordPress" title="WordPress" /></a> <a href="http://www.phpbb.com"><img src="/wp-content/themes/vesper/images/logo_phpBB_t.gif" alt="phpBB" title="phpBB" /></a> <a href="http://debian.cat"><img src="/wp-content/themes/vesper/images/logo_debian_t.gif" alt="Debian" title="Debian" /></a> entre altre programari lliure.<span class="allotjament"> <strong>Allotjat a:</strong> <a href="http://www.udl.cat"><img src="/wp-content/themes/vesper/images/logo_UdL_t.gif" alt="UDL" title="UDL" /></a></span></div>
+<div id="logospeu">El lloc web de <strong>Softvalencià</strong> funciona gràcies a <a href="http://ca.wordpress.org"><img src="/imatges/wordpress.png" alt="WordPress" title="WordPress" /></a> <a href="http://www.phpbb.com"><img src="/wp-content/themes/wp-softvalencia/images/logo_phpBB_t.gif" alt="phpBB" title="phpBB" /></a> <a href="http://debian.cat"><img src="/wp-content/themes/wp-softvalencia/images/logo_debian_t.gif" alt="Debian" title="Debian" /></a> entre altre programari lliure.<span class="allotjament"> <strong>Allotjat a:</strong> <a href="http://www.udl.cat"><img src="/wp-content/themes/wp-softvalencia/images/logo_UdL_t.gif" alt="UDL" title="UDL" /></a></span></div>
 
 
 
