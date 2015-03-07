@@ -1,0 +1,27 @@
+{% for post in posts %}
+    <div class="post">
+        <h2><a href="{{post.permalink}}">{{post.title}}</a></h2>
+        {{function('botons_socials')}}
+        	<div class="post-entry">
+                <ul class='post-meta'> 
+                    {% if attribute(post,'wpcf-imatge') %}
+                        <div class="programa">
+                            <img style="vertical-align:middle" src="{{ attribute(post,'wpcf-imatge') }}" />
+                        </div>
+                    {% endif %}
+                    {% if attribute(post,'wpcf-descripcio_curta') %}
+                        <div class="programa_desc">
+                            <br />{{ attribute(post,'wpcf-descripcio_curta') }}
+                        </div>
+                    {% endif %}
+                </ul>
+			</div>
+    </div>
+{% else %}
+    <div class="post">
+    	<div class="post-entry">
+			<h2>No s'ha trobat</h2>
+			<p class="center">Sembla que el que el que esteu cercant no es troba ací.</p>
+		</div>
+	</div>
+{% endfor %}

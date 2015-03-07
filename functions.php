@@ -170,7 +170,23 @@ function widget_area_404() {
 }
 add_action( 'widgets_init', 'widget_area_404' );
 
+function get_category_link_with_image() {
+    
+    $cat_link = '';
+    
+    if(is_category()) {
+        $cat = intval( get_query_var('cat') );
+        
+        if ($cat == '3') {
+            $cat_link = '<a href="/categoria/windows"><img src="'.get_stylesheet_directory_uri().'/imatges/windowsos.png"/></a>';
+        } elseif ($cat == '5') {
+            $cat_link ='<a href="/categoria/gnulinux"><img src="'.get_stylesheet_directory_uri().'/imatges/linuxos.png"/></a>';
+        } elseif ($cat == '15') {
+            $cat_link = '<a href="/categoria/macosx"><img src="'.get_stylesheet_directory_uri().'/imatges/macos.png"/></a>';
+        }
+    }
+    return $cat_link;
+}
 
-
-
+include(get_stylesheet_directory().'/twig-extensions.php');
 ?>
