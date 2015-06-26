@@ -1,21 +1,16 @@
-<?php get_header(); ?>
+<?php
 
-			<div id="content">
-				<?php
-					include(TEMPLATEPATH . "/wp-loop.php");
-				?>
-				<?php comments_template(); ?>
 
-				<div class="navigation">
-					<div class="alignleft"><?php next_post_link('%link', '&laquo; %title'); ?></div>
-					<div class="alignright"><?php previous_post_link('%link', '%title &raquo;'); ?></div>
-				</div>
-			</div>
+    $context = Timber::get_context();
+    $post = Timber::query_post();
+    $context['post'] = $post;
+    $context['comment_form'] = TimberHelper::get_comment_form();
 
-			<div id="sidebar">
-				<?php
-					get_sidebar();
-				?>
-			</div>
-
-<?php get_footer(); ?>
+    if ( post_password_required( $post->ID ) ) {
+        Timber::render( 'single-password.twig', $context );
+    } else {
+        Timber::render( array(
+            'twig/single-' . $post->ID . '.twig',
+            'twig/single-' . $post->post_type . '.twig',
+            'twig/single.twig' ), $context );
+    }

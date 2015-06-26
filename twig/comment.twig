@@ -1,0 +1,13 @@
+{# comment #}
+<li>
+    {{comment.author_email}}
+    {{function('get_avatar', comment.comment_author_email, '35')}}
+    <h3>{{function('get_comment_author_link', comment.ID)}} diu:</h3>
+    <small>
+            {{ comment.date | date('d M, Y') }} a les {{ comment.date | date('H:j') }}
+    </small><br/><br/>
+    {% if comment.status == 'approved' %}
+        <small><em>El comentari està esperant a ser moderat.</em></small>
+    {% endif %}
+    {{ comment | wpautop}}
+</li>

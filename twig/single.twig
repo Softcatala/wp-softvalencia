@@ -1,0 +1,57 @@
+{% extends "twig/base.twig" %}
+
+{% block content %}
+    
+	<div class="post">
+		<h2>{{post.title}}</h2>
+        {{function('botons_socials')}}
+        <div class="post-info">
+            {% block postpremetadata %}
+                <span class="setting filedlink">{{ post.categories|join(',') }}</span>
+                <a class="setting commentslink" href="#comments">
+                    {{function('sv_n_comentaris', post.comment_count)}}
+                </a>
+            {% endblock %}
+        </div>
+
+        <div class="post-entry">
+            {{post.content}}
+        </div>
+
+    </div>    
+		
+    <div id="comments">
+        {{function('botons_socials')}}
+    	<h2>
+            {{function('sv_n_comentaris', post.comment_count)}}
+            a &#8220;{{post.title}}&#8221;
+        
+        </h2>
+        
+        {% for cmt in post.comments %}
+            <ol class="commentlist">
+                {% include 'twig/comment.twig' with {comment: cmt} %}
+            </ol>
+        {% endfor %}
+
+        {% if post.comment_status == 'open' %}
+            {{ comment_form }}
+        {% endif %}
+
+	</div>
+
+	<hr />
+
+    <div class="navigation">
+        {% if post.prev %}
+        <div class="alignleft">
+            <a href="{{post.prev.link}}">{{post.prev.title}}</a>
+        </div>
+        {% endif %}
+        {% if post.next %}
+        <div class="alignright">
+            <a href="{{post.next.link}}">{{post.next.title}}</a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

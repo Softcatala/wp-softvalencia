@@ -188,5 +188,15 @@ function get_category_link_with_image() {
     return $cat_link;
 }
 
+function sv_n_comentaris($num) {
+    if($num == 0) {
+        return 'Cap comentari';
+    } else if ($num == 1) {
+        return '1 comentari';
+    } else {
+        return "$num comentaris";
+    }
+}
+
 include(get_stylesheet_directory().'/twig-extensions.php');
 ?>

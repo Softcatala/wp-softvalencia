@@ -44,7 +44,7 @@ hr {
     padding:0;
 }
 
-label.comments {
+#respond label, label.comments {
     display:block;
 }
 
