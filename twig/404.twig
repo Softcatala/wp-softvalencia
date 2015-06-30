@@ -1,12 +1,18 @@
+{% extends 'twig/base.twig' %}
 
-<div class="post">
-    <h2>No s'ha trobat la pàgina</h2><br />
-    <p>Sembla que la pàgina que estaves buscant no existeix:<br /><br />
-        <div style="font-weight:bold;text-align:center;width:100%">
-            <pre>{{url}}</pre>
-        </div>
-    </p>
-    <br />
-    {{sidebar404}}
-</div>
-		
+{% block title %}
+    No s'ha trobat la pàgina
+{% endblock %}
+
+{% block content %}
+ 	<div class="post">
+        <h2>No s'ha trobat la pàgina</h2><br />
+        <p>Sembla que la pàgina que estaves buscant no existeix:<br /><br />
+            <div style="font-weight:bold;text-align:center;width:100%">
+                <pre>{{url}}</pre>
+            </div>
+        </p>
+        <br />
+        {{sidebar404}}
+    </div>		
+{% endblock %}

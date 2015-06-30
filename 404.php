@@ -6,4 +6,4 @@
 
 	$context['posts'] = array();
 
-    Timber::render('twig/index.twig', $context);
+    Timber::render('twig/404.twig', $context);
