@@ -91,9 +91,9 @@
 
 		<li><a href="/">Inici</a></li>		
 
-		<li><a href="/traductor">Traductor</a></li>
+		<li><a href="/traductor/">Traductor</a></li>
 
-		<li><a href="/corrector">Corrector</a></li>
+		<li><a href="/corrector/">Corrector</a></li>
 
 		<li><a href="http://www.softcatala.org/forum" target="_blank">Fòrums d'ajuda</a></li>
 
