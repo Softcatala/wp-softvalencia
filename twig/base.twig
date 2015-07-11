@@ -1,9 +1,18 @@
-{{function('get_header')}}
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+{% block html_head_container %}
 
-    <div id="sidebar">
-        {{function('get_sidebar')}}
-    </div>
-{{function('get_footer')}}
+    {% include 'twig/html-header.twig' %}
+
+{% endblock %}
+
+    <body>
+        <div id="wrapper">
+            {% include 'twig/menutop.twig' %}
+
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div id="sidebar">
+                {{function('get_sidebar')}}
+            </div>
+        {{function('get_footer')}}

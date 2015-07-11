@@ -1,0 +1,27 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ca-valencia"  {{site.language_attributes}}>
+    <head profile="http://gmpg.org/xfn/11">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="{{site.charset}}" />
+        <title>
+            {% block title %}
+                {{ wp_title }}
+            {% endblock %}
+        </title>
+        <meta name="description" content="{{site.description}}">
+        <link rel="pingback" href="{{site.pingback_url}}" />
+        <link rel="shortcut icon" type="image/x-icon" href="/imatges/favicon.ico" />
+        <meta name="author" content="Softvalencià" />
+        <link rel="stylesheet" href="{{site.theme.link}}/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/estils/tabs.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/estils/spell_checker.css" type="text/css" media="screen" />
+        <script type="text/javascript" src="/js/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="/js/base.js"></script>
+        <script type="text/javascript" src="/js/jquery.cycle.js"></script>
+        <script type="text/javascript" src="/lib/corrector/cpaint/cpaint2.inc.compressed.js"></script>
+        <script type="text/javascript" src="/js/corrector/spell_checker.js"></script>
+
+        {% block staticfiles %}{% endblock %}
+
+        {{function('wp_head')}}
+    </head>

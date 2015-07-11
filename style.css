@@ -113,7 +113,7 @@ a:hover {
     width:68%;
 }
 
-.menutop h1 {
+.menutop1_links {
     color:#505150;
     float:left;
     font-family:Verdana,Arial,Helvetica,sans-serif;
@@ -144,7 +144,7 @@ a:hover {
     text-decoration:none;
 }
 
-.menutop h1 a {
+.menutop .menutop1_links a {
     color:#505150;
     font-weight:700;
     text-decoration:none;
