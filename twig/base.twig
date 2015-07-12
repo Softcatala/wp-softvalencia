@@ -1,7 +1,5 @@
 {% block html_head_container %}
-
     {% include 'twig/html-header.twig' %}
-
 {% endblock %}
 
     <body>
@@ -12,7 +10,9 @@
                 {% block content %}{% endblock %}
             </div>
 
+            {% block sidebar %}
             <div id="sidebar">
                 {{function('get_sidebar')}}
             </div>
+            {% endblock %}
         {{function('get_footer')}}

@@ -20,6 +20,7 @@
 
     </div>    
 		
+    {% block comments %}
     <div id="comments">
         {{function('botons_socials')}}
     	<h2>
@@ -54,4 +55,6 @@
         </div>
         {% endif %}
     </div>
+
+    {% endblock %}
 {% endblock %}
