@@ -106,7 +106,7 @@ Escriviu o enganxeu un text en el formulari i cliqueu en «Revisa».
 		<textarea id="copytextarea" name="copytextarea" style="width: 100%;display:none" rows="6" readonly="readonly"></textarea>
 
 		<div style="margin-top:2px;position:relative;">
-			<input type="hidden" name="lang" value="ca"/>
+			<input type="hidden" name="lang" value="ca-ES-valencia"/>
                         <div style="margin-top:0px; display:block; float: right; text-align:right;">
 
 				<input type="submit" id="submit" name="_action_checkText" value="Revisa">
