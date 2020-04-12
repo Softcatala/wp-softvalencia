@@ -1,7 +1,4 @@
 <?php
-/*
-Template Name: foobar
-*/
 
 $args = array(
     'post_type' => array('guies'),
