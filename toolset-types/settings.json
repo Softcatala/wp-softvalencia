@@ -1,0 +1,246 @@
+{
+  "types": {
+    "groups": {
+      "group": {
+        "ID": "1083",
+        "post_title": "Programes",
+        "post_type": "wp-types-group",
+        "post_status": "publish",
+        "meta": {
+          "_wp_types_group_filters_association": "any",
+          "_wp_types_group_fields": ",descripcio_portada,descripcio_curta,imatge,",
+          "_wp_types_group_post_types": ",guies,",
+          "_wp_types_group_terms": "all",
+          "_wp_types_group_templates": "all",
+          "_wpcf_conditional_display": { "relation": "AND" }
+        },
+        "hash": "57a8830a45641bac4d7ecf63ff74c6b1",
+        "checksum": "57a8830a45641bac4d7ecf63ff74c6b1",
+        "__types_id": "programes",
+        "__types_title": "Programes"
+      }
+    },
+    "fields": {
+      "field": [
+        {
+          "id": "descripcio_portada",
+          "slug": "descripcio_portada",
+          "type": "textfield",
+          "name": "Descripcio de la portada",
+          "data": {
+            "repetitive": "0",
+            "conditional_display": { "relation": "AND" },
+            "disabled_by_type": "0"
+          },
+          "meta_key": "wpcf-descripcio_portada",
+          "meta_type": "postmeta",
+          "__types_id": "descripcio_portada",
+          "__types_title": "Descripcio de la portada",
+          "hash": "1b0b81f565265396505bb372915dbb40",
+          "checksum": "1b0b81f565265396505bb372915dbb40"
+        },
+        {
+          "id": "descripcio_curta",
+          "slug": "descripcio_curta",
+          "type": "wysiwyg",
+          "name": "Descripció curta",
+          "data": {
+            "conditional_display": { "relation": "AND" },
+            "disabled_by_type": "0"
+          },
+          "meta_key": "wpcf-descripcio_curta",
+          "meta_type": "postmeta",
+          "__types_id": "descripcio_curta",
+          "__types_title": "Descripció curta",
+          "hash": "7b5878d5774670d5e6ae429db570785c",
+          "checksum": "7b5878d5774670d5e6ae429db570785c"
+        },
+        {
+          "id": "imatge",
+          "slug": "imatge",
+          "type": "image",
+          "name": "Imatge",
+          "data": {
+            "repetitive": "0",
+            "conditional_display": { "relation": "AND" },
+            "disabled_by_type": "0",
+            "validate": {
+              "url2": {
+                "active": "1",
+                "message": "Please enter a valid URL address pointing to the image file.",
+                "suppress_for_cred": "1"
+              }
+            }
+          },
+          "meta_key": "wpcf-imatge",
+          "meta_type": "postmeta",
+          "__types_id": "imatge",
+          "__types_title": "Imatge",
+          "hash": "61a99bbdcfc3a992bd37dcc48f96361b",
+          "checksum": "61a99bbdcfc3a992bd37dcc48f96361b"
+        }
+      ]
+    },
+    "types": {
+      "type": {
+        "wpcf-post-type": "guies",
+        "labels": {
+          "name": "Guies",
+          "singular_name": "Guia",
+          "add_new": "Afegeix nova",
+          "add_new_item": "Afegeix guia nova",
+          "edit_item": "Edita %s",
+          "new_item": "Nova %s",
+          "view_item": "Visualitza %s",
+          "search_items": "Cerca %s",
+          "not_found": "No s\\'ha trobat cap %s",
+          "not_found_in_trash": "No hi ha %s a la paperera",
+          "parent_item_colon": "%s pare",
+          "all_items": "%s"
+        },
+        "slug": "guies",
+        "public": "public",
+        "taxonomies": { "category": "1" },
+        "supports": {
+          "title": "1",
+          "editor": "1",
+          "comments": "1",
+          "trackbacks": "1",
+          "revisions": "1",
+          "author": "1",
+          "excerpt": "1",
+          "thumbnail": "1",
+          "custom-fields": "1"
+        },
+        "rewrite": {
+          "enabled": "1",
+          "custom": "custom",
+          "feeds": "1",
+          "pages": "1"
+        },
+        "has_archive": "1",
+        "show_in_menu": "1",
+        "show_ui": "1",
+        "publicly_queryable": "1",
+        "can_export": "1",
+        "show_in_nav_menus": "1",
+        "query_var_enabled": "1",
+        "permalink_epmask": "EP_PERMALINK",
+        "id": "guies",
+        "__types_id": "guies",
+        "__types_title": "Guies",
+        "hash": "6ef3e4ad6154b0ed7eeac25768668805",
+        "checksum": "6ef3e4ad6154b0ed7eeac25768668805"
+      }
+    },
+    "taxonomies": {
+      "taxonomy": [
+        {
+          "labels": {
+            "name": "Categories",
+            "singular_name": "Categoria",
+            "search_items": "Cerca categories",
+            "all_items": "Totes les categories",
+            "parent_item": "Categoria pare",
+            "parent_item_colon": "Categoria pare:",
+            "edit_item": "Edita la categoria",
+            "view_item": "Mostra la categoria",
+            "update_item": "Actualitza la categoria",
+            "add_new_item": "Afegeix",
+            "new_item_name": "Nou nom de categoria",
+            "not_found": "No s'han trobat categories.",
+            "no_terms": "No hi ha categories",
+            "items_list_navigation": "Navegació per la llista de categories.",
+            "items_list": "Llista de categories",
+            "menu_name": "Categories",
+            "name_admin_bar": "category"
+          },
+          "public": "1",
+          "hierarchical": "1",
+          "show_ui": "1",
+          "show_in_menu": "1",
+          "show_in_nav_menus": "1",
+          "show_tagcloud": "1",
+          "show_in_quick_edit": "1",
+          "show_admin_column": "1",
+          "meta_box_cb": "post_categories_meta_box",
+          "rewrite": {
+            "hierarchical": "1",
+            "ep_mask": "512",
+            "slug": "categoria"
+          },
+          "query_var": "category_name",
+          "_builtin": "1",
+          "cap": {
+            "manage_terms": "manage_categories",
+            "edit_terms": "manage_categories",
+            "delete_terms": "manage_categories",
+            "assign_terms": "edit_posts"
+          },
+          "name": "category",
+          "label": "Categories",
+          "slug": "category",
+          "supports": {
+            "__types_cpt_supports_post": "1",
+            "__types_cpt_supports_guies": "1"
+          },
+          "id": "category",
+          "__types_id": "category",
+          "__types_title": "Categories",
+          "checksum": "96cc7db02d675b89be5c5def014920e8"
+        },
+        {
+          "labels": {
+            "name": "Etiquetes",
+            "singular_name": "Etiqueta",
+            "search_items": "Cerca etiquetes",
+            "popular_items": "Etiquetes més comunes",
+            "all_items": "Totes les etiquetes",
+            "edit_item": "Edita l'etiqueta",
+            "view_item": "Mostra l'etiqueta",
+            "update_item": "Actualitza l'etiqueta",
+            "add_new_item": "Afegeix una etiqueta nova",
+            "new_item_name": "Nou nom d'etiqueta",
+            "separate_items_with_commas": "Separa les etiquetes amb comes",
+            "add_or_remove_items": "Afegeix o suprimeix etiquetes",
+            "choose_from_most_used": "Trieu una de les etiquetes més usades",
+            "not_found": "No s'han trobat etiquetes.",
+            "no_terms": "Cap etiqueta",
+            "items_list_navigation": "Navegació per la llista d'etiquetes",
+            "items_list": "Llista d'etiquetes",
+            "menu_name": "Etiquetes",
+            "name_admin_bar": "post_tag"
+          },
+          "public": "1",
+          "show_ui": "1",
+          "show_in_menu": "1",
+          "show_in_nav_menus": "1",
+          "show_tagcloud": "1",
+          "show_in_quick_edit": "1",
+          "show_admin_column": "1",
+          "meta_box_cb": "post_tags_meta_box",
+          "rewrite": {
+            "ep_mask": "1024",
+            "slug": "etiqueta"
+          },
+          "query_var": "tag",
+          "_builtin": "1",
+          "cap": {
+            "manage_terms": "manage_categories",
+            "edit_terms": "manage_categories",
+            "delete_terms": "manage_categories",
+            "assign_terms": "edit_posts"
+          },
+          "name": "post_tag",
+          "label": "Etiquetes",
+          "slug": "post_tag",
+          "supports": { "__types_cpt_supports_post": "1" },
+          "id": "post_tag",
+          "__types_id": "post_tag",
+          "__types_title": "Etiquetes",
+          "checksum": "b4e8bfd99032bc6677648585f9b0c1ef"
+        }
+      ]
+    }
+  }
+}

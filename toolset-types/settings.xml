@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types>
+    <settings>
+        <add_resized_images_to_library>0</add_resized_images_to_library>
+        <register_translations_on_import>1</register_translations_on_import>
+        <images_remote>0</images_remote>
+        <images_remote_cache_time>36</images_remote_cache_time>
+        <help_box>by_types</help_box>
+        <hide_standard_custom_fields_metabox>show</hide_standard_custom_fields_metabox>
+        <postmeta_unfiltered_html>on</postmeta_unfiltered_html>
+        <usermeta_unfiltered_html>on</usermeta_unfiltered_html>
+    </settings>
+    <groups>
+        <group>
+            <ID>1083</ID>
+            <post_content></post_content>
+            <post_title>Programes</post_title>
+            <post_excerpt></post_excerpt>
+            <post_type>wp-types-group</post_type>
+            <post_status>publish</post_status>
+            <meta>
+                <_wp_types_group_filters_association>any</_wp_types_group_filters_association>
+                <_wp_types_group_fields>,descripcio_portada,descripcio_curta,imatge,</_wp_types_group_fields>
+                <_wp_types_group_post_types>,guies,</_wp_types_group_post_types>
+                <_wp_types_group_terms>all</_wp_types_group_terms>
+                <_wp_types_group_admin_styles></_wp_types_group_admin_styles>
+                <_wp_types_group_templates>all</_wp_types_group_templates>
+                <_wpcf_conditional_display>
+                    <relation>AND</relation>
+                    <custom></custom>
+                </_wpcf_conditional_display>
+            </meta>
+            <hash>57a8830a45641bac4d7ecf63ff74c6b1</hash>
+            <checksum>57a8830a45641bac4d7ecf63ff74c6b1</checksum>
+            <__types_id>programes</__types_id>
+            <__types_title>Programes</__types_title>
+        </group>
+    </groups>
+    <fields>
+        <field>
+            <id>descripcio_portada</id>
+            <slug>descripcio_portada</slug>
+            <type>textfield</type>
+            <name>Descripcio de la portada</name>
+            <description></description>
+            <data>
+                <repetitive>0</repetitive>
+                <conditional_display>
+                    <relation>AND</relation>
+                    <custom></custom>
+                </conditional_display>
+                <disabled_by_type>0</disabled_by_type>
+            </data>
+            <meta_key>wpcf-descripcio_portada</meta_key>
+            <meta_type>postmeta</meta_type>
+            <__types_id>descripcio_portada</__types_id>
+            <__types_title>Descripcio de la portada</__types_title>
+            <hash>1b0b81f565265396505bb372915dbb40</hash>
+            <checksum>1b0b81f565265396505bb372915dbb40</checksum>
+        </field>
+        <field>
+            <id>descripcio_curta</id>
+            <slug>descripcio_curta</slug>
+            <type>wysiwyg</type>
+            <name>Descripció curta</name>
+            <description></description>
+            <data>
+                <conditional_display>
+                    <relation>AND</relation>
+                    <custom></custom>
+                </conditional_display>
+                <disabled_by_type>0</disabled_by_type>
+            </data>
+            <meta_key>wpcf-descripcio_curta</meta_key>
+            <meta_type>postmeta</meta_type>
+            <__types_id>descripcio_curta</__types_id>
+            <__types_title>Descripció curta</__types_title>
+            <hash>7b5878d5774670d5e6ae429db570785c</hash>
+            <checksum>7b5878d5774670d5e6ae429db570785c</checksum>
+        </field>
+        <field>
+            <id>imatge</id>
+            <slug>imatge</slug>
+            <type>image</type>
+            <name>Imatge</name>
+            <description></description>
+            <data>
+                <repetitive>0</repetitive>
+                <conditional_display>
+                    <relation>AND</relation>
+                    <custom></custom>
+                </conditional_display>
+                <disabled_by_type>0</disabled_by_type>
+                <validate>
+                    <url2>
+                        <active>1</active>
+                        <message>Please enter a valid URL address pointing to the image file.</message>
+                        <suppress_for_cred>1</suppress_for_cred>
+                    </url2>
+                </validate>
+            </data>
+            <meta_key>wpcf-imatge</meta_key>
+            <meta_type>postmeta</meta_type>
+            <__types_id>imatge</__types_id>
+            <__types_title>Imatge</__types_title>
+            <hash>61a99bbdcfc3a992bd37dcc48f96361b</hash>
+            <checksum>61a99bbdcfc3a992bd37dcc48f96361b</checksum>
+        </field>
+    </fields>
+    <types>
+        <type>
+            <wpcf-post-type>guies</wpcf-post-type>
+            <labels>
+                <name>Guies</name>
+                <singular_name>Guia</singular_name>
+                <add_new>Afegeix nova</add_new>
+                <add_new_item>Afegeix guia nova</add_new_item>
+                <edit_item>Edita %s</edit_item>
+                <new_item>Nova %s</new_item>
+                <view_item>Visualitza %s</view_item>
+                <search_items>Cerca %s</search_items>
+                <not_found>No s\&#039;ha trobat cap %s</not_found>
+                <not_found_in_trash>No hi ha %s a la paperera</not_found_in_trash>
+                <parent_item_colon>%s pare</parent_item_colon>
+                <all_items>%s</all_items>
+            </labels>
+            <slug>guies</slug>
+            <description></description>
+            <public>public</public>
+            <menu_position></menu_position>
+            <menu_icon></menu_icon>
+            <taxonomies>
+                <category>1</category>
+            </taxonomies>
+            <supports>
+                <title>1</title>
+                <editor>1</editor>
+                <comments>1</comments>
+                <trackbacks>1</trackbacks>
+                <revisions>1</revisions>
+                <author>1</author>
+                <excerpt>1</excerpt>
+                <thumbnail>1</thumbnail>
+                <custom-fields>1</custom-fields>
+            </supports>
+            <rewrite>
+                <enabled>1</enabled>
+                <custom>custom</custom>
+                <slug></slug>
+                <feeds>1</feeds>
+                <pages>1</pages>
+            </rewrite>
+            <has_archive>1</has_archive>
+            <show_in_menu>1</show_in_menu>
+            <show_in_menu_page></show_in_menu_page>
+            <show_ui>1</show_ui>
+            <publicly_queryable>1</publicly_queryable>
+            <can_export>1</can_export>
+            <show_in_nav_menus>1</show_in_nav_menus>
+            <query_var_enabled>1</query_var_enabled>
+            <query_var></query_var>
+            <permalink_epmask>EP_PERMALINK</permalink_epmask>
+            <id>guies</id>
+            <__types_id>guies</__types_id>
+            <__types_title>Guies</__types_title>
+            <hash>6ef3e4ad6154b0ed7eeac25768668805</hash>
+            <checksum>6ef3e4ad6154b0ed7eeac25768668805</checksum>
+        </type>
+    </types>
+    <taxonomies>
+        <taxonomy>
+            <labels>
+                <name>Categories</name>
+                <singular_name>Categoria</singular_name>
+                <search_items>Cerca categories</search_items>
+                <popular_items></popular_items>
+                <all_items>Totes les categories</all_items>
+                <parent_item>Categoria pare</parent_item>
+                <parent_item_colon>Categoria pare:</parent_item_colon>
+                <edit_item>Edita la categoria</edit_item>
+                <view_item>Mostra la categoria</view_item>
+                <update_item>Actualitza la categoria</update_item>
+                <add_new_item>Afegeix</add_new_item>
+                <new_item_name>Nou nom de categoria</new_item_name>
+                <separate_items_with_commas></separate_items_with_commas>
+                <add_or_remove_items></add_or_remove_items>
+                <choose_from_most_used></choose_from_most_used>
+                <not_found>No s&#039;han trobat categories.</not_found>
+                <no_terms>No hi ha categories</no_terms>
+                <items_list_navigation>Navegació per la llista de categories.</items_list_navigation>
+                <items_list>Llista de categories</items_list>
+                <menu_name>Categories</menu_name>
+                <name_admin_bar>category</name_admin_bar>
+            </labels>
+            <description></description>
+            <public>1</public>
+            <hierarchical>1</hierarchical>
+            <show_ui>1</show_ui>
+            <show_in_menu>1</show_in_menu>
+            <show_in_nav_menus>1</show_in_nav_menus>
+            <show_tagcloud>1</show_tagcloud>
+            <show_in_quick_edit>1</show_in_quick_edit>
+            <show_admin_column>1</show_admin_column>
+            <meta_box_cb>post_categories_meta_box</meta_box_cb>
+            <rewrite>
+                <with_front></with_front>
+                <hierarchical>1</hierarchical>
+                <ep_mask>512</ep_mask>
+                <slug>categoria</slug>
+            </rewrite>
+            <query_var>category_name</query_var>
+            <update_count_callback></update_count_callback>
+            <_builtin>1</_builtin>
+            <cap>
+                <manage_terms>manage_categories</manage_terms>
+                <edit_terms>manage_categories</edit_terms>
+                <delete_terms>manage_categories</delete_terms>
+                <assign_terms>edit_posts</assign_terms>
+            </cap>
+            <name>category</name>
+            <label>Categories</label>
+            <slug>category</slug>
+            <supports>
+                <__types_cpt_supports_post>1</__types_cpt_supports_post>
+                <__types_cpt_supports_guies>1</__types_cpt_supports_guies>
+            </supports>
+            <id>category</id>
+            <__types_id>category</__types_id>
+            <__types_title>Categories</__types_title>
+            <checksum>96cc7db02d675b89be5c5def014920e8</checksum>
+        </taxonomy>
+        <taxonomy>
+            <labels>
+                <name>Etiquetes</name>
+                <singular_name>Etiqueta</singular_name>
+                <search_items>Cerca etiquetes</search_items>
+                <popular_items>Etiquetes més comunes</popular_items>
+                <all_items>Totes les etiquetes</all_items>
+                <parent_item></parent_item>
+                <parent_item_colon></parent_item_colon>
+                <edit_item>Edita l&#039;etiqueta</edit_item>
+                <view_item>Mostra l&#039;etiqueta</view_item>
+                <update_item>Actualitza l&#039;etiqueta</update_item>
+                <add_new_item>Afegeix una etiqueta nova</add_new_item>
+                <new_item_name>Nou nom d&#039;etiqueta</new_item_name>
+                <separate_items_with_commas>Separa les etiquetes amb comes</separate_items_with_commas>
+                <add_or_remove_items>Afegeix o suprimeix etiquetes</add_or_remove_items>
+                <choose_from_most_used>Trieu una de les etiquetes més usades</choose_from_most_used>
+                <not_found>No s&#039;han trobat etiquetes.</not_found>
+                <no_terms>Cap etiqueta</no_terms>
+                <items_list_navigation>Navegació per la llista d&#039;etiquetes</items_list_navigation>
+                <items_list>Llista d&#039;etiquetes</items_list>
+                <menu_name>Etiquetes</menu_name>
+                <name_admin_bar>post_tag</name_admin_bar>
+            </labels>
+            <description></description>
+            <public>1</public>
+            <hierarchical></hierarchical>
+            <show_ui>1</show_ui>
+            <show_in_menu>1</show_in_menu>
+            <show_in_nav_menus>1</show_in_nav_menus>
+            <show_tagcloud>1</show_tagcloud>
+            <show_in_quick_edit>1</show_in_quick_edit>
+            <show_admin_column>1</show_admin_column>
+            <meta_box_cb>post_tags_meta_box</meta_box_cb>
+            <rewrite>
+                <with_front></with_front>
+                <hierarchical></hierarchical>
+                <ep_mask>1024</ep_mask>
+                <slug>etiqueta</slug>
+            </rewrite>
+            <query_var>tag</query_var>
+            <update_count_callback></update_count_callback>
+            <_builtin>1</_builtin>
+            <cap>
+                <manage_terms>manage_categories</manage_terms>
+                <edit_terms>manage_categories</edit_terms>
+                <delete_terms>manage_categories</delete_terms>
+                <assign_terms>edit_posts</assign_terms>
+            </cap>
+            <name>post_tag</name>
+            <label>Etiquetes</label>
+            <slug>post_tag</slug>
+            <supports>
+                <__types_cpt_supports_post>1</__types_cpt_supports_post>
+            </supports>
+            <id>post_tag</id>
+            <__types_id>post_tag</__types_id>
+            <__types_title>Etiquetes</__types_title>
+            <checksum>b4e8bfd99032bc6677648585f9b0c1ef</checksum>
+        </taxonomy>
+    </taxonomies>
+</types>

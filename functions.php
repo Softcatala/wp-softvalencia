@@ -199,4 +199,6 @@ function sv_n_comentaris($num) {
 }
 
 include(get_stylesheet_directory().'/twig-extensions.php');
+
+include(get_stylesheet_directory().'/types/types.php');
 ?>
