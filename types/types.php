@@ -50,7 +50,7 @@ function guies()
         'publicly_queryable' => true,
         'capability_type' => 'page',
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'guies'),
+        'rewrite' => array('slug' => 'guies', 'with_front'=> false),
     );
     register_post_type('guies', $args);
 
