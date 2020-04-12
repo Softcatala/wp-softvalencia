@@ -2,7 +2,7 @@
 
 <div id="footerhome">
 
-<p>Softcatalà © <?php echo date('Y');?>   <a href="/contacte">Contacte</a>  |  <a href="/avis-legal">Avís legal</a>  |  <a href="http://www.softvalencia.org/guies/firefox-en-valencia/" title="Firefox en valencià">Firefox en valencià</a></p>
+<p>Softcatalà © <?php echo date('Y');?>   <a href="/contacte">Contacte</a>  |  <a href="/avis-legal">Avís legal</a>  |  <a href="https://www.softvalencia.org/guies/firefox-en-valencia/" title="Firefox en valencià">Firefox en valencià</a></p>
 
 <p>Si no s'indica el contrari, el contingut text es troba disponible sota els termes d'una llicència <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.ca">Atribució - CompartirIgual 3.0</a></p>
 

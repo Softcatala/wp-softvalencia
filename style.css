@@ -3,7 +3,7 @@ Theme Name: WP-Softvalencià
 Theme URI: http://www.softvalencia.org
 Description: Tema per a la web de SV, basat originalment en Vesper
 Copyright: 2008
-Version: 0.1
+Version: 0.2
 Author: <a href="http://desarmats.wordpress.org">Pau Iranzo</a> i <a href="http://xavi.ivars.me">Xavi Ivars</a> 
 Tags: fixed width, simple, clean, widget ready, two columns, sidebar right, orange, valid XHTML, valid CSS, ie6, ie7, firefox 2.0, opera 9.0, wp-pagenavi, excerpt reloaded
 */
@@ -113,7 +113,7 @@ a:hover {
     width:68%;
 }
 
-.menutop1_links {
+.menutop1_links h1 {
     color:#505150;
     float:left;
     font-family:Verdana,Arial,Helvetica,sans-serif;

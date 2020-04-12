@@ -22,9 +22,9 @@
 
 <div class="imatges_br">
 
-<a href="http://www.softcatala.org"><img src="http://www.softvalencia.org/wp-content/uploads/2010/03/sc-xic-e1269881754771.png"/></a>
+<a href="http://www.softcatala.org"><img src="https://www.softvalencia.org/wp-content/uploads/2010/03/sc-xic-e1269881754771.png"/></a>
 
-<a href="http://www.escolavalenciana.org"><img src="http://www.softvalencia.org/wp-content/uploads/2010/03/ev-xic1.png"/></a>
+<a href="http://www.escolavalenciana.org"><img src="https://www.softvalencia.org/wp-content/uploads/2010/03/ev-xic1.png"/></a>
 
 </div>
 
