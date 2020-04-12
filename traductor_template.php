@@ -20,7 +20,7 @@ Template Name: Traductor
 <div id="content">
 
   <div class="post">
-      <h2>Traductor valencià</h2>
+      <h1>Traductor valencià</h1>
       <div class="post-entry">
 
         <?php

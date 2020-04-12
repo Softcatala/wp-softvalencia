@@ -1,0 +1,115 @@
+.status {
+    color: #FF0000;
+    padding-left: 150px;
+    white-space: nowrap;
+}
+
+.spell_container {
+    width: 100% !important;
+}
+
+.suggestion_box {
+    background-color: #fef3ed;
+    border: 1px solid #555;
+    position: absolute;
+    padding: 2px 2px 2px 2px;
+    text-align: left;
+    width: 180px;
+}
+.suggestion {
+    cursor: pointer;
+    text-decoration: underline;
+    /*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+    /*font-size: 11px;*/
+    color: #000000;
+}
+
+.corrected_word
+{
+    color: #005500;
+}
+
+.addtoDictionary {
+    background-color:  #E8F1FF;
+    cursor: pointer;
+    text-decoration: underline;
+    /*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+    /*font-size: 11px;*/
+    color: #000000;
+}
+
+.edit_box {
+    background-color: #FFFFFF;
+    color: #000000;
+    /*	font-family: Verdana, Arial, Helvetica, sans-serif;*/
+    /*	font-size: 11px;*/
+    border: 1px solid #888888;
+    -moz-border-radius: 3.5px;
+    -webkit-border-radius: 3.5px;
+    border-radius: 3.5px;
+    margin-top:20px;
+    padding:10px;
+    /*
+        padding-top: 2px;
+        padding-left: 2px;
+        overflow: auto;
+    */
+}
+.text_box {
+    background-color: #FFFFFF;
+    color: #000000;
+    /*	font-family: Verdana, Arial, Helvetica, sans-serif;*/
+    /*	font-size: 11px;*/
+}
+.highlight {
+    color: #FF0000;
+    /*	font-family: Verdana, Arial, Helvetica, sans-serif;*/
+    /*	font-size: 11px;*/
+    text-decoration: underline;
+    cursor: pointer;
+}
+.no_misspellings {
+    color: #009933;
+}
+.check_spelling {
+    color: #0066CC;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.resume_editing {
+    color: #009933;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.control_panel {
+
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+
+.action {
+    margin-bottom:6px;
+    margin-top:-47px;
+    padding-bottom:10px;
+}
+
+.pastehere {
+
+    padding-right: 3em;
+    text-align: left;
+}
+
+.texte {
+    padding:10px;
+    width:95%;
+    margin: 15px 0px;
+}
+
+.corrector_intro {
+    background-color: #E5E3D7;
+    padding: 20px 30px;
+}

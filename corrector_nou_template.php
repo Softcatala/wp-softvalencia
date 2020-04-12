@@ -20,7 +20,7 @@ Template Name: Corrector_nou
 <div id="content">
 
   <div class="post">
-      <h2>Corrector de valencià</h2>
+      <h1>Corrector de valencià</h1>
       <div class="post-entry">
 
 	<?php 

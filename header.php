@@ -19,46 +19,28 @@
 
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
-<link rel="shortcut icon" type="image/x-icon" href="/imatges/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" />
 
 <meta name="author" content="Softcatalà" />
 
-<link rel="stylesheet" href="/estils/tabs.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/tabs.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/spell_checker.css" type="text/css" media="screen" />
 
-<link rel="stylesheet" href="/estils/spell_checker.css" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery-latest.min.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/base.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
+<script type="text/javascript" src="https://www.softvalencia.org/lib/corrector/cpaint/cpaint2.inc.compressed.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/corrector/spell_checker.js"></script>
 
-<script type="text/javascript" src="/js/jquery-latest.min.js"></script>
-
-<script type="text/javascript" src="/js/base.js"></script>
-<script type="text/javascript" src="/js/jquery.cycle.js"></script>
-
-
-<script type="text/javascript" src="/lib/corrector/cpaint/cpaint2.inc.compressed.js"></script>
-
-<script type="text/javascript" src="/js/corrector/spell_checker.js"></script>
-
-<?php
-
-	if(is_traductor()) {
-
-	        echo '<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/traductor.js"></script>';
-                echo '<meta name="keywords" content="traductor, valencià, castellà, traductor, valenciano, castellano, catalán, català, francés, francès, portuguès, portugués" />';
-	}
-
-
-
-?>
-
-
+<?php if(is_traductor()): ?>
+    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/traductor.js"></script>
+    <meta name="keywords" content="traductor, valencià, castellà, traductor, valenciano, castellano, catalán, català, francés, francès, portuguès, portugués" />
+<?php endif; ?>
 
 <?php wp_head(); ?>
 
-
-
 </head>
-
 <body>
-
 <div id="wrapper">
 
 
@@ -67,19 +49,23 @@
 
 			<div class="sidebar_home">
 
-			<div class="logo_cap"><a href="/"><img src="/wp-content/themes/wp-softvalencia/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
-
+			<div class="logo_cap">
+                <?php if (!is_home()): ?>
+                    <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
+                <?php else: ?>
+                    <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
+                <?php endif; ?>
 			</div>
 
 			<!--i menutop -->
-
 			<div class="menutop">
-
 			<div class="menutop1">
-
 			<div class="menutop1_links">
-
-			<h1><a href="/preguntes-mes-frequents/">Preguntes més freqüents</a>  |     <a href="/contacte">Contacte</a> | <a href="/collaboreu/">Col·laboreu amb nosaltres</a></h1>
+			<div class="top-links">
+                <a href="<?php echo get_site_url(); ?>/preguntes-mes-frequents/">Preguntes més freqüents</a>  |
+                <a href="<?php echo get_site_url(); ?>/contacte">Contacte</a> |
+                <a href="<?php echo get_site_url(); ?>/collaboreu/">Col·laboreu amb nosaltres</a>
+            </div>
 
 			</div>
 
@@ -89,11 +75,11 @@
 
 		<ul>
 
-		<li><a href="/">Inici</a></li>		
+		<li><a href="<?php echo get_site_url(); ?>">Inici</a></li>
 
-		<li><a href="/traductor/">Traductor</a></li>
+		<li><a href="<?php echo get_site_url(); ?>/traductor/">Traductor</a></li>
 
-		<li><a href="/corrector/">Corrector</a></li>
+		<li><a href="<?php echo get_site_url(); ?>/corrector/">Corrector</a></li>
 
 		<li><a href="http://www.softcatala.org/forum" target="_blank">Fòrums d'ajuda</a></li>
 

@@ -20,7 +20,7 @@ Template Name: Navega
 <div id="content">
 
   <div class="post">
-      <h2>Navega en valencià</h2>
+      <h1>Navega en valencià</h1>
       <div class="post-entry">
 
 	<?php 
