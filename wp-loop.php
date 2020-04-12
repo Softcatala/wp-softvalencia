@@ -73,12 +73,18 @@ query_posts( $args );
 
                         <ul class='post-meta'> 
 <?php 
-$imatge=get_post_meta(get_the_ID(),'mf-imatge',true);
+$imatge=get_field('imatge');
 
-if($imatge!='') {
+if( !empty( $image ) ) {
 ?>
-<div class="programa"><img style="vertical-align:middle" src="<?=get_post_meta(get_the_ID(),'mf-imatge',true)?>" /></div>
-<?php } ?>
+    <div class="programa">
+        <img style="vertical-align:middle"
+             src="<?php echo esc_url($image['url']); ?>"
+             alt="<?php echo esc_attr($image['alt']); ?>" />
+    </div>
+<?php
+}
+?>
 <div class="programa_desc"><br /><?=get_post_meta(get_the_ID(),'descripcio_curta',true)?></div>
 </ul> 
 
