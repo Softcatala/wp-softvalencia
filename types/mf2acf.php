@@ -24,6 +24,7 @@ if ($eq_query->have_posts()) {
 
         if ($photo_name != "") {
 
+            $photo_name = basename($photo_name);
             $ff = '/var/www/softvalencia.org/htdocs/wp-content/files_mf/' . $photo_name;
             $handle = fopen($ff, "r");
             $ffcontents = fread($handle, filesize($ff));
