@@ -72,7 +72,7 @@ a:hover {
 
 #wrapper {
     position:relative;
-    width:990px;
+    max-width:1360px;
     margin:0 auto;
     padding:0 10px;
 }
@@ -87,9 +87,8 @@ a:hover {
 
 #capcalera {
     float:left;
-    height:100px;
-    width:1025px;
-    margin-bottom:10px;
+    height:101px;
+    width:100%;
 }
 
 .sidebar_home {
@@ -113,7 +112,7 @@ a:hover {
     width:68%;
 }
 
-.menutop1_links h1 {
+.menutop1_links .top-links {
     color:#505150;
     float:left;
     font-family:Verdana,Arial,Helvetica,sans-serif;
@@ -190,7 +189,7 @@ a:hover {
 #content {
     float:right;
     min-height:455px;
-    width:660px;
+    width: 65%;
     margin-top:-14px;
     padding:15px 0;
 }
@@ -200,7 +199,7 @@ a:hover {
 }
 
 #sidebar {
-    width:280px;
+    width:28%;
     min-height:455px;
     float:left;
     background:#F7F8F3 none repeat scroll 0 0;
@@ -358,7 +357,7 @@ a:hover {
     padding:15px 20px;
 }
 
-.post h2 {
+.post h2, .post h1 {
     font-size:1.6em;
     color:#BA2626;
     margin:0 0 .2em;
@@ -889,21 +888,24 @@ img.actualitat {
 
 div#pre_content {
     width:100%;
-    margin:0 0 1px;
+    height: 495px;
+    overflow: hidden;
 }
 
 div#pre_content_esq {
     float:left;
-    width:300px;
+    width:30%;
     background:#E7511F;
     color:#F9CEBB;
-    height:318px;
-    margin-top:-10px;
+    height:485px;
     margin-bottom:10px;
+}
+
+#pre_content_esq .introduction-text {
     padding:0 20px 17px;
 }
 
-div#pre_content_esq h3 {
+div#pre_content_esq h3, div#pre_content_esq h1 {
     color:#FFF;
     font-size:19px;
     font-weight:700;
@@ -913,9 +915,9 @@ div#pre_content_esq h3 {
 
 div#pre_content_dreta {
     float:right;
-    width:650px;
-    height:253px;
-    margin-top:-10px;
+    width:70%;
+    height:485px;
+    overflow: hidden;
 }
 
 li#slide1 {
@@ -1067,7 +1069,7 @@ div.social li {
     opacity:0.3;
     text-align:center;
     z-index:-10;
-    margin:-49px auto 0;
+    margin:45px auto 0
 }
 
 .imatges_br img {
@@ -1078,7 +1080,7 @@ div.social li {
 #content1 {
     float:right;
     min-height:455px;
-    width:660px;
+    width:68%;
     padding:4px 0;
 }
 
@@ -1086,8 +1088,7 @@ div.sistema {
     background:none repeat scroll 0 0 #F7F8F3;
     float:left;
     margin-left:10px;
-    margin-right:-5px;
-    width:190px;
+    width:29%;
     border:1px solid #D5D6D1;
     padding:10px;
 }
@@ -1616,4 +1617,9 @@ li#slide3 li,li#slide4 li {
 
 a.button.left:active,button.left:active,a.button.middle:active,button.middle:active,a.button.right:active,button.right:active,a.big.button span.icon,button.big span.icon {
     top:0;
+}
+
+/* Mobile */
+@media (max-width: 771px) {
+
 }
