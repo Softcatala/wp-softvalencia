@@ -73,13 +73,13 @@ query_posts( $args );
 
                         <ul class='post-meta'> 
 <?php 
-$imatge=get_post_meta(get_the_ID(),'wpcf-imatge',true);
+$imatge=get_post_meta(get_the_ID(),'mf-imatge',true);
 
 if($imatge!='') {
 ?>
-<div class="programa"><img style="vertical-align:middle" src="<?=get_post_meta(get_the_ID(),'wpcf-imatge',true)?>" /></div>
+<div class="programa"><img style="vertical-align:middle" src="<?=get_post_meta(get_the_ID(),'mf-imatge',true)?>" /></div>
 <?php } ?>
-<div class="programa_desc"><br /><?=get_post_meta(get_the_ID(),'wpcf-descripcio_curta',true)?></div>
+<div class="programa_desc"><br /><?=get_post_meta(get_the_ID(),'descripcio_curta',true)?></div>
 </ul> 
 
                         <?php } ?>

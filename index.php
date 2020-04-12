@@ -71,7 +71,7 @@ $windows->the_post();
 echo '<li><a href="',get_permalink(get_the_ID()),'">';
 the_title();
 echo '</a><br /><small>';
-$d_curta = get_post_custom_values('wpcf-descripcio_portada');
+$d_curta = get_post_custom_values('descripcio_portada');
 echo $d_curta[0];
 echo'</small></li>';
 }
@@ -95,7 +95,7 @@ $windows->the_post();
 echo '<li><a href="',get_permalink(get_the_ID()),'">';
 the_title();
 echo '</a><br /><small>';
-$d_curta = get_post_custom_values('wpcf-descripcio_portada');
+$d_curta = get_post_custom_values('descripcio_portada');
 echo $d_curta[0];
 echo'</small></li>';
 }
@@ -120,7 +120,7 @@ $windows->the_post();
 echo '<li><a href="',get_permalink(get_the_ID()),'">';
 the_title();
 echo '</a><br /><small>';
-$d_curta = get_post_custom_values('wpcf-descripcio_portada');
+$d_curta = get_post_custom_values('descripcio_portada');
 echo $d_curta[0];
 echo'</small></li>';
 }

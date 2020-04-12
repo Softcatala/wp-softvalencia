@@ -4,14 +4,14 @@
         {{function('botons_socials')}}
         	<div class="post-entry">
                 <ul class='post-meta'> 
-                    {% if attribute(post,'wpcf-imatge') %}
+                    {% if attribute(post,'mf-imatge') %}
                         <div class="programa">
-                            <img style="vertical-align:middle" src="{{ attribute(post,'wpcf-imatge') }}" />
+                            <img style="vertical-align:middle" src="{{ attribute(post,'mf-imatge') }}" />
                         </div>
                     {% endif %}
-                    {% if attribute(post,'wpcf-descripcio_curta') %}
+                    {% if post.descripcio_curta %}
                         <div class="programa_desc">
-                            <br />{{ attribute(post,'wpcf-descripcio_curta') }}
+                            <br />{{ post.descripcio_curta }}
                         </div>
                     {% endif %}
                 </ul>

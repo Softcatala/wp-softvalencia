@@ -15,7 +15,7 @@ class SoftvalenciaPost extends TimberPost {
     
     public function wpcf_image() {
         if (!$this->_wpcf_image) {
-            $this->_wpcf_image=get_post_meta(get_the_ID(),'wpcf-imatge',true);
+            $this->_wpcf_image=get_post_meta(get_the_ID(),'mf-imatge',true);
         }
         return $this->_issue;
     }
