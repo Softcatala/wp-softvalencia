@@ -3,9 +3,9 @@
         <div id="pre_content_esq">
             <div class="introduction-text">
                 <h1>Què és Softvalencià?</h1>
-                Softvalencià és un lloc web on trobareu guies i programari per posar el vostre ordinador en valencià.
+                Softvalencià és un lloc web on trobareu guies i programari per a posar el vostre ordinador en valencià.
                 <h3>Qui hi ha al darrere?</h3>
-                Softvalencià és una iniciativa dels membres valencians de Softcatalà i d'Escola Valenciana per promoure l'ús del programari en valencià.
+                Softvalencià és una iniciativa dels membres valencians de Softcatalà i d'Escola Valenciana per a promoure l'ús del programari en valencià.
                 Softvalencià té el reconeixement dels serveis lingüístics de les universitats públiques valencianes i de l'Acadèmia Valenciana de la Llengua.
                 <div class="imatges_br">
                     <a href="http://www.softcatala.org"><img src="https://www.softvalencia.org/wp-content/uploads/2010/03/sc-xic-e1269881754771.png"/></a>
