@@ -93,7 +93,7 @@ Escriviu o enganxeu un text en el formulari i cliqueu en «Revisa».
 
 <!-- comença el formulari -->
 <div class="textcorrectorgram">
-<form name="checkform" action="http://community.languagetool.org" method="post">
+<form name="checkform" action="https://community.languagetool.org" method="post">
 <div style="margin: 10px 0px 10px 10px; float: left; display:none;">
 				Formes: 
 				<input type="radio" name="formes" value="formes_generals" id="check_formes_generals">generals
@@ -170,8 +170,8 @@ Fent clic en les paraules assenyalades, obtindreu suggeriments de correcció, si
 <td><p><strong>Crèdits</strong>. Este servei està basat en el programari lliure <a href="http://languagetool.org/ca/">LanguageTool</a>, i s'ha desenvolupat gràcies a <a href="http://riuraueditors.cat/web/content/12-eines" title="Riurau Editors">Riurau Editors</a> i <a href="http://www.softcatala.org/wiki/Projectes/LanguageTool">Softcatalà</a>.</p></td>
 <td><p><strong>Contacte</strong>. Per a qualsevol suggeriment, escriviu-nos a <a href="mailto:corrector@softcatala.org">corrector@softcatala.org</a>.</p></td>
 </tr>
-<tr><td><a href="http://www.languagetool.org/ca" title="LanguageTool"><img alt="LangueageTool" src="http://www.softcatala.org/w/images/f/fa/LanguageToolBig.png" /></a>
-<a style="margin-left:30px;" href="http://riuraueditors.cat/web/content/12-eines" title="Riurau Editors"><img alt="Riurau Editors" src="http://www.softcatala.org/w/images/c/c9/Logo_riuraueditors.png" /></a>
+<tr><td><a href="http://www.languagetool.org/ca" title="LanguageTool"><img alt="LangueageTool" src="https://www.softcatala.org/w/images/f/fa/LanguageToolBig.png" /></a>
+<a style="margin-left:30px;" href="http://riuraueditors.cat/web/content/12-eines" title="Riurau Editors"><img alt="Riurau Editors" src="https://www.softcatala.org/w/images/c/c9/Logo_riuraueditors.png" /></a>
 </td>
 <td>
 
