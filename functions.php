@@ -124,7 +124,7 @@ function is_traductor() {
 function botons_socials() {
 ?>
 		<div class="botons-socials">
-			<?php xv_plusone_button(); stc_tweetbutton(); sfc_like_button(array('width' => '300'));  ?>
+			<?php xv_plusone_button(); /*stc_tweetbutton(); sfc_like_button(array('width' => '300')); */ ?>
 			<br />	
 		</div>
 <?php
