@@ -47,7 +47,7 @@ jQuery.fn.limitMaxlength = function(options){
                 var muk = (jQuery('#unknown:checked').length)?'yes':'no';
                 var txt = jQuery('#sl').val();
                 jQuery.ajax({
-                        url:"https://www.softvalencia.org/apertium/json/translate",
+                        url:"https://api.softcatala.org/traductor/v1/translate",
                         type:"POST",
                         data : {'langpair':langpair,'q':txt,'markUnknown':muk,'key':'DjnAT2hnZKPHe98Ry/s2dmClDbs'},
                         dataType: 'json',

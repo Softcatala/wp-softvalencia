@@ -33,7 +33,7 @@
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/corrector/spell_checker.js"></script>
 
 <?php if(is_traductor()): ?>
-    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/traductor.js"></script>
+    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/traductor.js?20200108"></script>
     <meta name="keywords" content="traductor, valencià, castellà, traductor, valenciano, castellano, catalán, català, francés, francès, portuguès, portugués" />
 <?php endif; ?>
 
