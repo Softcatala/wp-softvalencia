@@ -30,15 +30,15 @@ Template Name: Corrector_nou
 
 <!--CORRECTOR WRAPPER -->
 
-	<script type="text/javascript" src="/languagetool/js/fancybox/jquery.fancybox-1.3.4.pack.js?v=20200416"></script>
-	<link type="text/css" rel="stylesheet" media="all" href="/languagetool/js/fancybox/jquery.fancybox-1.3.4.css?v=20200416" />
-	<script type="text/javascript" src="/languagetool/online-check/tiny_mce/tiny_mce.js?v=20200416"></script>
-	<script type="text/javascript" src="/languagetool/online-check/tiny_mce/plugins/atd-tinymce/editor_plugin.js?v=20200416"></script>
-	<script type="text/javascript" src="/languagetool/js/ZeroClipboard.js?v=20200416"></script>
-	<script type="text/javascript" src="/languagetool/js/jquery.metacookie.js?v=20200416"></script>
+	<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/languagetool/js/fancybox/jquery.fancybox-1.3.4.pack.js?v=20200416"></script>
+	<link type="text/css" rel="stylesheet" media="all" href="/wp-content/themes/wp-softvalencia/languagetool/js/fancybox/jquery.fancybox-1.3.4.css?v=20200416" />
+	<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/languagetool/online-check/tiny_mce/tiny_mce.js?v=20200416"></script>
+	<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/languagetool/online-check/tiny_mce/plugins/atd-tinymce/editor_plugin.js?v=20200416"></script>
+	<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/languagetool/js/ZeroClipboard.js?v=20200416"></script>
+	<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/languagetool/js/jquery.metacookie.js?v=20200416"></script>
 
-	<script type="text/javascript" src="/languagetool/languagetool.js?v=20200416"></script>
-	<link type="text/css" rel="stylesheet" media="all" href="/languagetool/languagetool.css?v=20200416" />
+	<script type="text/javascript" src="/wp-content/themes/wp-softvalencia/languagetool/languagetool.js?v=20200416"></script>
+	<link type="text/css" rel="stylesheet" media="all" href="/wp-content/themes/wp-softvalencia/languagetool/languagetool.css?v=20200416" />
 
 
 <style type="text/css">

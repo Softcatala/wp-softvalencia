@@ -173,7 +173,7 @@ function ajaxSpell(varName, width, height, spellUrl, divId, name, id, title, val
     currObj.pastehereSpan.className = "pastehere";
     currObj.pastehereSpan.id = "pastehere";
 
-    currObj.pastehereSpan.innerHTML = "<h3>Enganxeu un text a continuaciÃ³</h3>";
+    currObj.pastehereSpan.innerHTML = "<h3>Enganxeu un text a continuació</h3>";
     currObj.controlPanelDiv.appendChild(currObj.pastehereSpan);
 
     //the span that toggles between spell checking and editing
@@ -182,7 +182,7 @@ function ajaxSpell(varName, width, height, spellUrl, divId, name, id, title, val
     currObj.actionSpan.id = "action";
     if(currObj.config['useIcons'])
     {
-        currObj.actionSpan.innerHTML = "<a class=\"check_spelling\" onclick=\"setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".spellCheck();\"><img src=\"/imatges/comprova_ort.png\" title=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute\" alt=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute;\" border=\"0\" /></a>";
+        currObj.actionSpan.innerHTML = "<a class=\"check_spelling\" onclick=\"setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".spellCheck();\"><img src=\"/wp-content/themes/wp-softvalencia/imatges/comprova_ort.png\" title=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute\" alt=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute;\" border=\"0\" /></a>";
     }
     else
     {
@@ -270,7 +270,7 @@ function spellCheck_cb(new_data)
 
     if(currObj.config['useIcons'])
     {
-        currObj.actionSpan.innerHTML = "<a class=\"resume_editing\" onclick=\"setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".resumeEditing();\"><img src=\"/imatges/repren_ort.png\" title=\"Repr&egrave;n l'edici&oacute;\" alt=\"Resume Editing\" border=\"0\" /></a>";
+        currObj.actionSpan.innerHTML = "<a class=\"resume_editing\" onclick=\"setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".resumeEditing();\"><img src=\"/wp-content/themes/wp-softvalencia/imatges/repren_ort.png\" title=\"Repr&egrave;n l'edici&oacute;\" alt=\"Resume Editing\" border=\"0\" /></a>";
     }
     else
     {
@@ -312,7 +312,7 @@ function spellCheck() {
 
     if(currObj.config['useIcons'])
     {
-        currObj.actionSpan.innerHTML = "<img src=\"/imatges/spellcheck.png\" width=\"16\" height=\"16\" title=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute;\" alt=\"Check Spelling &amp; Preview\" border=\"0\" />";
+        currObj.actionSpan.innerHTML = "<img src=\"/wp-content/themes/wp-softvalencia/imatges/spellcheck.png\" width=\"16\" height=\"16\" title=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute;\" alt=\"Check Spelling &amp; Preview\" border=\"0\" />";
     }
     else
     {
@@ -321,7 +321,7 @@ function spellCheck() {
 
     if(currObj.config['useIcons'])
     {
-        currObj.statusSpan.innerHTML = "<img src=\"/imatges/working.gif\" width=\"16\" height=\"16\" title=\"S'est&agarve; verificant...\" alt=\"Checking...\" border=\"0\" />";
+        currObj.statusSpan.innerHTML = "<img src=\"/wp-content/themes/wp-softvalencia/imatges/working.gif\" width=\"16\" height=\"16\" title=\"S'est&agarve; verificant...\" alt=\"Checking...\" border=\"0\" />";
     }
     else
     {
@@ -362,7 +362,7 @@ function addWord(id)
 
     if(currObj.config['useIcons'])
     {
-        currObj.statusSpan.innerHTML = "<img src=\"/imatges/working.gif\" width=\"16\" height=\"16\" title=\"Adding Word...\" alt=\"Adding Word...\" border=\"0\" />";
+        currObj.statusSpan.innerHTML = "<img src=\"/wp-content/themes/wp-softvalencia/imatges/working.gif\" width=\"16\" height=\"16\" title=\"Adding Word...\" alt=\"Adding Word...\" border=\"0\" />";
     }
     else
     {
@@ -555,7 +555,7 @@ function showSuggestions(word, id)
     with(currObj);
     if(currObj.config['useIcons'])
     {
-        currObj.statusSpan.innerHTML = "<img src=\"/imatges/working.gif\" width=\"16\" height=\"16\" title=\"Searching...\" alt=\"Searching...\" border=\"0\" />";
+        currObj.statusSpan.innerHTML = "<img src=\"/wp-content/themes/wp-softvalencia/imatges/working.gif\" width=\"16\" height=\"16\" title=\"Searching...\" alt=\"Searching...\" border=\"0\" />";
     }
     else
     {
@@ -689,7 +689,7 @@ function resumeEditing()
     with(currObj);
     if(currObj.config['useIcons'])
     {
-        currObj.actionSpan.innerHTML = "<a class=\"resume_editing\"><img src=\"/imatges/page_white_edit.png\" width=\"16\" height=\"16\" title=\"Repr&egrave;n l'edici&oacute\" alt=\"Resume Editing\" border=\"0\" /></a>";
+        currObj.actionSpan.innerHTML = "<a class=\"resume_editing\"><img src=\"/wp-content/themes/wp-softvalencia/imatges/page_white_edit.png\" width=\"16\" height=\"16\" title=\"Repr&egrave;n l'edici&oacute\" alt=\"Resume Editing\" border=\"0\" /></a>";
     }
     else
     {
@@ -697,7 +697,7 @@ function resumeEditing()
     }
     if(currObj.config['useIcons'])
     {
-        currObj.statusSpan.innerHTML = "<img src=\"/imatges/working.gif\" width=\"16\" height=\"16\" title=\"Est&agrave; treballant-s'hi...\" alt=\"Working...\" border=\"0\" />";
+        currObj.statusSpan.innerHTML = "<img src=\"/wp-content/themes/wp-softvalencia/imatges/working.gif\" width=\"16\" height=\"16\" title=\"Est&agrave; treballant-s'hi...\" alt=\"Working...\" border=\"0\" />";
     }
     else
     {
@@ -723,11 +723,11 @@ function resumeEditing()
 function resetAction()
 {
 
-    document.getElementById('pastehere').innerHTML = "<h3>Enganxeu un text a continuaciÃ³</h3>";
+    document.getElementById('pastehere').innerHTML = "<h3>Enganxeu un text a continuació</h3>";
     with(currObj);
     if(currObj.config['useIcons'])
     {
-        currObj.actionSpan.innerHTML = "<a class=\"check_spelling\" onclick=\"setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".spellCheck();\"><img src=\"/imatges/comprova_ort.png\" title=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute;\" alt=\"Check Spelling &amp; Preview\" border=\"0\" /></a>";
+        currObj.actionSpan.innerHTML = "<a class=\"check_spelling\" onclick=\"setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".spellCheck();\"><img src=\"/wp-content/themes/wp-softvalencia/imatges/comprova_ort.png\" title=\"Correcci&oacute; ortogr&agrave;fica i previsualitzaci&oacute;\" alt=\"Check Spelling &amp; Preview\" border=\"0\" /></a>";
     }
     else
     {

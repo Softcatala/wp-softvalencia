@@ -53,10 +53,10 @@
 </ul>
 <div class="social">
 		<ul>
-		  <li><a href="http://twitter.com/softvalencia"><img src="/imatges/twitter.png"/></a></li>
-		  <li><a href="http://www.facebook.com/#!/pages/Softvalencia/380344137430"><img src="/imatges/facebook.png"/></a></li>
-		  <li><a href="http://identi.ca/softvalencia"><img src="/imatges/identica.png"/></a></li>		  
-                  <li><a href="http://www.softvalencia.org/feed/"><img src="/imatges/rss.png"/></a></li>
+		  <li><a href="http://twitter.com/softvalencia"><img src="/wp-content/themes/wp-softvalencia/imatges/twitter.png"/></a></li>
+		  <li><a href="http://www.facebook.com/#!/pages/Softvalencia/380344137430"><img src="/wp-content/themes/wp-softvalencia/imatges/facebook.png"/></a></li>
+		  <li><a href="http://identi.ca/softvalencia"><img src="/wp-content/themes/wp-softvalencia/imatges/identica.png"/></a></li>		  
+                  <li><a href="http://www.softvalencia.org/feed/"><img src="/wp-content/themes/wp-softvalencia/imatges/rss.png"/></a></li>
 		</ul>
 	  </div>
 

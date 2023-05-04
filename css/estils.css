@@ -1,0 +1,41 @@
+a { color: #ffffff; text-decoration: none; }
+a:hover { color: #EF9304; }
+
+body {
+  background:#eee url(/imatges/fons.png) repeat-x;
+  text-align:left;
+  color:#666;
+  width:700px;
+  font-size:16px;
+  font-family:Verdana,Arial,Helvetica,sans-serif;
+  margin:0 auto;
+  padding:0;
+}
+
+ul {
+  text-align:center;
+  list-style-type:none;
+  margin:0;
+  padding:7px 20px;
+}
+
+li {
+  list-style-type:none;
+  display:inline;
+  margin:0;
+  padding:0 30px;
+}
+
+.cap {
+  background: url(imatges/fons_cap.png) repeat-x;
+  color: #ffffff;
+  -moz-border-radius-bottomleft:10px;
+  -moz-border-radius-bottomright:10px;
+  background-color:#CB1E2C;
+  color:#FFFFFF;
+}
+
+.logo {
+  margin:114px auto 0;
+  text-align:center;
+}
