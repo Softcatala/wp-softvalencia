@@ -6,7 +6,7 @@ if ( function_exists('register_sidebar') )
         'before_title' => '<h2 class="widgettitle">',
         'after_title' => '</h2>',
     ));
-define(SFC_LOCALE,'ca_ES');
+define('SFC_LOCALE','ca_ES');
 remove_action('wp_head', 'pagenavi_css');
 	
 remove_action('wp_head', 'shortlink_wp_head');
