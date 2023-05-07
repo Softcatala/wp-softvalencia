@@ -51,9 +51,9 @@
 
 			<div class="logo_cap">
                 <?php if (!is_home()): ?>
-                    <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
+                    <a href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
                 <?php else: ?>
-                    <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></div>
                 <?php endif; ?>
 			</div>
 
@@ -62,9 +62,9 @@
 			<div class="menutop1">
 			<div class="menutop1_links">
 			<div class="top-links">
-                <a href="<?php echo get_site_url(); ?>/preguntes-mes-frequents/">Preguntes més freqüents</a>  |
-                <a href="<?php echo get_site_url(); ?>/contacte">Contacte</a> |
-                <a href="<?php echo get_site_url(); ?>/collaboreu/">Col·laboreu amb nosaltres</a>
+                <a href="<?php echo get_home_url(); ?>/preguntes-mes-frequents/">Preguntes més freqüents</a>  |
+                <a href="<?php echo get_home_url(); ?>/contacte">Contacte</a> |
+                <a href="<?php echo get_home_url(); ?>/collaboreu/">Col·laboreu amb nosaltres</a>
             </div>
 
 			</div>
@@ -75,11 +75,11 @@
 
 		<ul>
 
-		<li><a href="<?php echo get_site_url(); ?>">Inici</a></li>
+		<li><a href="<?php echo get_home_url(); ?>">Inici</a></li>
 
-		<li><a href="<?php echo get_site_url(); ?>/traductor/">Traductor</a></li>
+		<li><a href="<?php echo get_home_url(); ?>/traductor/">Traductor</a></li>
 
-		<li><a href="<?php echo get_site_url(); ?>/corrector/">Corrector</a></li>
+		<li><a href="<?php echo get_home_url(); ?>/corrector/">Corrector</a></li>
 
 		<li><a href="http://www.softcatala.org/forum" target="_blank">Fòrums d'ajuda</a></li>
 
