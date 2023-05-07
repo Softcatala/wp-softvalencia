@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $postText = html_entity_decode($postText, ENT_COMPAT, "UTF-8");
   
   $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, "http://www.softcatala.org/languagetool/api/");
+  curl_setopt($curl, CURLOPT_URL, "http://api.softcatala.org/corrector/");
   curl_setopt($curl, CURLOPT_PORT, 80);
 //  curl_setopt($curl, CURLOPT_SSLVERSION, 3);
   curl_setopt($curl, CURLOPT_POST, true);
