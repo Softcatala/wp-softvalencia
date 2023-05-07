@@ -27,7 +27,7 @@
 
         <div id="windows" class="sistema">
 
-            <a href="<?php echo get_option( 'siteurl' ); ?>/categoria/windows"><img src="<?php echo get_option( 'siteurl' ); ?>/imatges/windowsos.png"/></a>
+            <a href="<?php echo get_home_url(); ?>/categoria/windows"><img src="<?php echo get_home_url(); ?>/imatges/windowsos.png"/></a>
 
             <ul>
 
@@ -50,7 +50,7 @@
         </div>
 
         <div id="mac" class="sistema">
-            <a href="<?php echo get_option( 'siteurl' ); ?>/categoria/macosx"><img src="<?php echo get_option( 'siteurl' ); ?>/imatges/macos.png"/></a>
+            <a href="<?php echo get_home_url(); ?>/categoria/macosx"><img src="<?php echo get_home_url(); ?>/imatges/macos.png"/></a>
             <ul>
                 <?php
                 $windows = new WP_Query('cat=15&posts_per_page=15&post_type=guies');
@@ -68,7 +68,7 @@
 
         </div>
         <div id="linux" class="sistema">
-            <a href="<?php echo get_option( 'siteurl' ); ?>/categoria/gnulinux"><img src="<?php echo get_option( 'siteurl' ); ?>/imatges/linuxos.png"/></a>
+            <a href="<?php echo get_home_url(); ?>/categoria/gnulinux"><img src="<?php echo get_home_url(); ?>/imatges/linuxos.png"/></a>
             <ul>
                 <?php
                 $windows = new WP_Query('cat=5&posts_per_page=15&post_type=guies');
