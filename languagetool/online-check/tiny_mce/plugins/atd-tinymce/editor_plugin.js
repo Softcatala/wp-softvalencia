@@ -617,7 +617,7 @@ AtDCore.prototype.isIE = function() {
 
      _logUserEvents : function(type, errorDescription, suggestion, suggestion_position)
       {
-        if (sc_settings.log_corrector_user_events) {
+        if (sc_settings && sc_settings.log_corrector_user_events) {
             var SC_COOKIE_UUID = 'sc-languagetool-feedback-uuid';
 
             var value = jQuery.getCookie(SC_COOKIE_UUID);
