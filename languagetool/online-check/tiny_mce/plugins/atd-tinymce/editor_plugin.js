@@ -14,13 +14,8 @@ var EXPORTED_SYMBOLS = ['AtDCore'];
 
 //
 // TODO:
-// 1. "ignore" and "ignore this kind of error" only works until the next check
-// 2. Ctrl-Z (undo) make the error markers go away
-//
-// fixed: cursor position gets lost on check
-// fixed: "ignore all" doesn't work
-// fixed: current cursor position is ignored when incorrect (it has its own node)
-// fixed: text with markup (even bold) messes up everything
+// 1. "ignore this error" only works until page reload
+// 2. Ctrl-Z (undo) makes the error markers go away
 //
 
 String.prototype.insert = function (index, string) {
@@ -37,7 +32,9 @@ function AtDCore() {
      * about errors in the text: */
     this.surrogateAttribute = "onkeypress";
     this.surrogateAttributeDelimiter = "---#---";
-};
+    this.ignoredRulesIds = [];
+    this.ignoredSpellingErrors = [];
+}
 
 /*
  * Internationalization Functions
@@ -60,13 +57,19 @@ AtDCore.prototype.addI18n = function(localizations) {
 
 AtDCore.prototype.processJSON = function(responseJSON) {
     var json = jQuery.parseJSON(responseJSON);
+    var incompleteResults = json.warnings && json.warnings.incompleteResults;
     this.suggestions = [];
     for (var key in json.matches) {
-	if (key == '______array') continue;
         var match = json.matches[key];
         var suggestion = {};
         // I didn't manage to make the CSS break the text, so we add breaks with Javascript:
         suggestion["description"] = this._wordwrap(match.message, 50, "<br/>");
+        /*if (match.rule.category.id === 'DNV_SECONDARY_FORM') {
+            suggestion["description"] = "Forma secundària.";
+        }
+        if (match.rule.category.id === 'DNV_COLLOQUIAL') {
+            suggestion["description"] = "Paraula o expressió col·loquial.";
+        }*/
         suggestion["suggestions"] = [];
         var suggestions = [];
         for (var k = 0; k < match.replacements.length; k++) {
@@ -74,7 +77,8 @@ AtDCore.prototype.processJSON = function(responseJSON) {
             if (repl.value) {
                 suggestions.push(repl.value);
             } else {
-                suggestions.push(repl);  //TODO: remove this case, it's for an old API version
+                wrongString = match.context.text.substring(match.context.offset, match.context.offset + match.length);
+                suggestions.push("<REMOVE>"+wrongString);
             }
         }
         suggestion["suggestions"] = suggestions.join("#");
@@ -82,21 +86,28 @@ AtDCore.prototype.processJSON = function(responseJSON) {
         suggestion["errorlength"] = match.length;
         suggestion["type"]        = match.rule.category.name;
         suggestion["ruleid"]      = match.rule.id;
-        suggestion["subid"]       = match.rule.subId;
+        suggestion["subid"]       = match.rule.subId || 0;
         suggestion["its20type"]   = match.rule.issueType;
-        suggestion["context"]     = match.context.text;
+        suggestion["context"]     = match.sentence;
         suggestion["contextoffset"] = match.context.offset;
         var urls = match.rule.urls;
         if (urls && urls.length > 0) {
-            if (urls[0].value) {
-                suggestion["moreinfo"] = urls[0].value;
-            } else {
-                suggestion["moreinfo"] = urls[0];  //TODO: remove this case, it's for an old API version
-            }
+          if (urls[0].value) {
+             suggestion["moreinfo"] = urls[0].value;
+          }
+          /*var k = 0;
+          var done = false;
+          while (!done && k<urls.length) {
+            if (urls[k].value.indexOf(".gva.es") !== -1) {  //show only info from gva.es websites
+              suggestion["moreinfo"] = urls[k].value;
+              done = true;
+            };
+            k++;
+          }*/
         }
         this.suggestions.push(suggestion);
     }
-    return this.suggestions;
+    return {suggestions: this.suggestions, incompleteResults: incompleteResults};
 };
 
 // Wrapper code by James Padolsey
@@ -114,7 +125,6 @@ AtDCore.prototype._wordwrap = function(str, width, brk, cut) {
 // End of wrapper code by James Padolsey
 
 AtDCore.prototype.findSuggestion = function(element) {
-    var text = element.innerHTML;
     var metaInfo = element.getAttribute(this.surrogateAttribute);
     var errorDescription = {};
     errorDescription["id"] = this.getSurrogatePart(metaInfo, 'id');
@@ -144,6 +154,9 @@ AtDCore.prototype.markMyWords = function() {
     var textWithCursor = this.getPlainTextWithCursorMarker();
     var cursorPos = textWithCursor.indexOf("\ufeff");
     var newText = this.getPlainText();
+  
+    newText = newText.replace(/</g, "\ue001");
+    newText = newText.replace(/>/g, "\ue002");
     
     var previousSpanStart = -1;
     // iterate backwards as we change the text and thus modify positions:
@@ -160,22 +173,24 @@ AtDCore.prototype.markMyWords = function() {
             previousSpanStart = spanStart;
             
             var ruleId = suggestion.ruleid;
-            var locqualityissuetype = suggestion.its20type;
+            if (this.ignoredRulesIds.indexOf(ruleId) !== -1) {
+                continue;
+            }
             var cssName;
-            if (locqualityissuetype == "misspelling") {
+            if (ruleId.indexOf("SPELLER_RULE") >= 0 || ruleId.indexOf("MORFOLOGIK_RULE") == 0 || ruleId == "HUNSPELL_NO_SUGGEST_RULE" || ruleId == "HUNSPELL_RULE") {
                 cssName = "hiddenSpellError";
-            }
-            else if (locqualityissuetype == "style" || locqualityissuetype == "locale-violation") {
+            } else if (suggestion.its20type === 'style' || suggestion.its20type === 'locale-violation' || suggestion.its20type === 'register') {
                 cssName = "hiddenGreenError";
-            }
-            else {
+            } else {
                 cssName = "hiddenGrammarError";
             }
             var delim = this.surrogateAttributeDelimiter;
             var coveredText = newText.substring(spanStart, spanEnd);
-            var metaInfo = ruleId + delim + suggestion.subid + delim + suggestion.description + delim 
-		+ suggestion.suggestions + delim + coveredText + delim + suggestion.context + delim + suggestion.contextoffset;
-	    //var metaInfo = ruleId + delim + suggestion.description + delim + suggestion.suggestions;
+            if (this.ignoredSpellingErrors.indexOf(coveredText) !== -1) {
+                continue;
+            }
+            var metaInfo = ruleId + delim + suggestion.subid + delim + suggestion.description + delim + suggestion.suggestions
+              + delim + coveredText + delim + suggestion.context + delim + suggestion.contextoffset;;
             if (suggestion.moreinfo) {
                 metaInfo += delim + suggestion.moreinfo;
             }
@@ -197,6 +212,9 @@ AtDCore.prototype.markMyWords = function() {
     newText = newText.replace(/^\n/, "");
     newText = newText.replace(/^\n/, "");
     newText = newText.replace(/\n/g, "<br/>");
+    newText = newText.replace(/\ue001/g, '&lt;');
+    newText = newText.replace(/\ue002/g, '&gt;');
+
     ed.setContent(newText);
     // now place the cursor where it was:
     ed.selection.select(ed.dom.select('span#caret_pos_holder')[0]);
@@ -268,8 +286,9 @@ AtDCore.prototype._getPlainText = function(removeCursor) {
             .replace(/<.*?>/g, "")
             .replace(/&amp;/g, "&")
             .replace(/&lt;/g, "<")
-            //.replace(/&gt;/g, ">")  // TODO: using '>' still gets converted to '&gt;' for the user - with this line the HTML gets messed up somtimes
-            .replace(/&nbsp;/g, " ");
+            // TODO: using '>' still gets converted to '&gt;' for the user - with this line the HTML gets messed up when '<' or '>' are used in the text to check:
+            .replace(/&gt;/g, ">") // buggy?
+            .replace(/&nbsp;/g, " ");  // see issue #10
     if (removeCursor) {
         plainText = plainText.replace(/\ufeff/g, "");  // feff = 65279 = cursor code
     }
@@ -295,7 +314,7 @@ AtDCore.prototype.removeWords = function(node, w) {
     return count;
 };
 
-AtDCore.prototype.removeWordsByRuleId = function(node, ruleId) {
+AtDCore.prototype.removeWordsByRuleId = function(node, ruleId, coveredText) {
     var count = 0;
     var parent = this;
 
@@ -306,7 +325,8 @@ AtDCore.prototype.removeWordsByRuleId = function(node, ruleId) {
                 parent.replaceWith(n, nnode);
             } else {
                 var surrogate = n.getAttribute(parent.surrogateAttribute);
-                if (!ruleId || (surrogate && parent.getSurrogatePart(surrogate, 'id') == ruleId)) {
+                var textIsRelevant = coveredText ? parent.getSurrogatePart(surrogate, 'coveredtext') == coveredText : true;
+                if (textIsRelevant && (surrogate && parent.getSurrogatePart(surrogate, 'id') == ruleId)) {
                     parent.removeParent(n);
                     count++;
                 }
@@ -322,7 +342,7 @@ AtDCore.prototype.isEmptySpan = function(node) {
 };
 
 AtDCore.prototype.isMarkedNode = function(node) {
-    return (this.hasClass(node, 'hiddenGrammarError') || this.hasClass(node, 'hiddenGreenError') || this.hasClass(node, 'hiddenSpellError') || this.hasClass(node, 'hiddenSuggestion'));
+    return (this.hasClass(node, 'hiddenGrammarError') || this.hasClass(node, 'hiddenSpellError') || this.hasClass(node, 'hiddenGreenError'));
 };
 
 /*
@@ -375,7 +395,8 @@ AtDCore.prototype.isIE = function() {
 
 (function() 
 {
-   var JSONRequest = tinymce.util.JSONRequest, each = tinymce.each, DOM = tinymce.DOM; 
+   var JSONRequest = tinymce.util.JSONRequest, each = tinymce.each, DOM = tinymce.DOM;
+   var maxTextLength = 30000;
 
    tinymce.create('tinymce.plugins.AfterTheDeadlinePlugin', 
    {
@@ -464,9 +485,9 @@ AtDCore.prototype.isIE = function() {
          ed.core = core;
 
          /* add a command to request a document check and process the results. */
-         editor.addCommand('mceWritingImprovementTool', function(languageCode, catOptions)
+         editor.addCommand('mceWritingImprovementTool', function(languageCode, userOptions)
          {
-             
+            
             if (plugin.menuVisible) {
               plugin._menu.hideMenu();
             }
@@ -477,63 +498,51 @@ AtDCore.prototype.isIE = function() {
 
             /* create the nifty spinny thing that says "hizzo, I'm doing something fo realz" */
             plugin.editor.setProgressState(1);
-
+            
             /* remove the previous errors */
             plugin._removeWords();
 
             /* send request to our service */
             var textContent = plugin.editor.core.getPlainText();
-            plugin.sendRequest('', textContent, languageCode, catOptions, function(data, request, someObject)
+            plugin.sendRequest('', textContent, languageCode, userOptions, function(data, request, jqXHR)
             {
                /* turn off the spinning thingie */
                plugin.editor.setProgressState(0);
+               document.checkform._action_checkText.disabled = false;
 
-               /* if the server is not accepting requests, let the user know */
-               if (request.responseText.substr(0, 6) == 'Error:')
-               {
-                  // the simple proxy turns code 500 responses into code 200 responses, but lets handle at least this error case:
-                  ed.windowManager.alert(request.responseText);
-                  return;
-               }
+               jQuery('#feedbackErrorMessage').html("");  // no severe errors, so clear that error area
 
-               if (request.status != 200 || request.responseText.substr(1, 4) == 'html' || request.responseText == '')
-               {
-                  ed.windowManager.alert( plugin.editor.getLang('AtD.message_server_error', 'There was a problem communicating with the service. Try again in one minute.') );
-                  return;
-               }
+               var results = core.processJSON(jqXHR.responseText);
 
-               var results = core.processJSON(request.responseText);
+               if (results.suggestions.length == 0) {
 
-               if (results.length == 0) {
                   var lang = plugin.editor.getParam('languagetool_i18n_current_lang')();
                   var noErrorsText = plugin.editor.getParam('languagetool_i18n_no_errors')[lang] || "No errors were found.";
-                  ed.windowManager.alert(noErrorsText);
+                  jQuery('#feedbackErrorMessage').html(noErrorsText);
                }
                else {
                   plugin.markMyWords();
-                  ed.suggestions = results; 
+                  ed.suggestions = results.suggestions; 
                }
+                if (results.incompleteResults) {
+                    jQuery('#feedbackErrorMessage').html("<div class='severeError'>These results may be incomplete due to a server timeout.</div>");
+                }
             });
          });
-          
+
          /* load cascading style sheet for this plugin */
           editor.onInit.add(function() 
          {
             /* loading the content.css file, why? I have no clue */
             if (editor.settings.content_css !== false)
             {
-               editor.dom.loadCSS(editor.getParam("languagetool_css_url", url + '/css/content.css'));
+               editor.dom.loadCSS(editor.getParam("languagetool_css_url", url + '/css/content.css?v4'));
             }
          });
 
          /* again showing a menu, I have no clue what */
          editor.onClick.add(plugin._showMenu, plugin);
-
-         /* comment this in and comment out the line below to get the browser's standard context menu on right click: */
-         editor.onContextMenu.add(plugin._showMenu, plugin);
-         // without this, the context menu opens but nothing in it can be selected:
-         //editor.onContextMenu.add(plugin._doNotShowMenu, plugin);
-
+         
          /* strip out the markup before the contents is serialized (and do it on a copy of the markup so we don't affect the user experience) */
          editor.onPreProcess.add(function(sender, object) 
          {
@@ -541,7 +550,7 @@ AtDCore.prototype.isIE = function() {
 
             each(dom.select('span', object.node).reverse(), function(n) 
             {
-               if (n && (dom.hasClass(n, 'hiddenGrammarError') || dom.hasClass(n, 'hiddenGreenError') || dom.hasClass(n, 'hiddenSpellError') || dom.hasClass(n, 'hiddenSuggestion') || dom.hasClass(n, 'mceItemHidden') || (dom.getAttrib(n, 'class') == "" && dom.getAttrib(n, 'style') == "" && dom.getAttrib(n, 'id') == "" && !dom.hasClass(n, 'Apple-style-span') && dom.getAttrib(n, 'mce_name') == ""))) 
+               if (n && (dom.hasClass(n, 'hiddenGrammarError') || dom.hasClass(n, 'hiddenSpellError') || dom.hasClass(n, 'hiddenGreenError') || dom.hasClass(n, 'mceItemHidden') || (dom.getAttrib(n, 'class') == "" && dom.getAttrib(n, 'style') == "" && dom.getAttrib(n, 'id') == "" && !dom.hasClass(n, 'Apple-style-span') && dom.getAttrib(n, 'mce_name') == ""))) 
                {
                   dom.remove(n, 1);
                }
@@ -566,25 +575,77 @@ AtDCore.prototype.isIE = function() {
       {
       },
 
-      _serverLog : function(type, errorDescription, suggestion, suggestion_position)
+      _trackEvent : function(val1, val2, val3)
       {
-	  var data = {"type": type,
-		      "rule": errorDescription["id"],
-		      "rule_id": errorDescription["subid"],
-		      "incorrect_text": errorDescription["coveredtext"],
-                      "incorrect_position": errorDescription["contextoffset"],
-		      "context": errorDescription["context"],
-                      "suggestion": suggestion,
-		      "suggestion_position": suggestion_position};
-	  $.ajax({
-	      url: 'https://www.softcatala.org/languagetool/feedback/log',
-	      type: 'POST',
-	      data: JSON.stringify(data),
-	      contentType: 'application/json; charset=utf-8',
-	      dataType: 'json',
-	  });
+          if (typeof(_paq) !== 'undefined') {
+              // Piwik tracking
+              _paq.push(['trackEvent', val1, val2, val3]);
+          }
+          this._logEventLocally();
       },
 
+      _logEventLocally : function()
+      {
+          if (localStorage) {
+              var actionCount = localStorage.getItem('actionCount');
+              if (actionCount == null) {
+                  actionCount = 0;
+                  try {
+                      localStorage.setItem('firstUse', new Date());  // get it back using new Date(Date.parse(localStorage.getItem('firstUse')))
+                  } catch (ex) {
+                      console.log("Could not store 'firstUse' to localStorage: " + ex);
+                  }
+              } else {
+                  actionCount = parseInt(actionCount);
+              }
+              actionCount++;
+              try {
+                  localStorage.setItem('actionCount', actionCount);
+              } catch (ex) {
+                  console.log("Could not store 'actionCount' to localStorage: " + ex);
+              }
+          }
+      },
+
+      _getUUID : function()
+      {
+          return (
+              [1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,
+              c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+      },
+
+     _logUserEvents : function(type, errorDescription, suggestion, suggestion_position)
+      {
+        if (sc_settings.log_corrector_user_events) {
+            var SC_COOKIE_UUID = 'sc-languagetool-feedback-uuid';
+
+            var value = jQuery.getCookie(SC_COOKIE_UUID);
+            if (value !== 'undefined') {
+                var uuid = value;
+            } else {
+                var uuid = this._getUUID();
+                jQuery.setCookie(SC_COOKIE_UUID, uuid);
+            }
+
+            var data = {"type": type,
+                        "user_uuid" : uuid,
+                        "rule_id": errorDescription["id"],
+                        "rule_sub_id": errorDescription["subid"],
+                        "incorrect_text": errorDescription["coveredtext"],
+                        "incorrect_position": errorDescription["contextoffset"],
+                        "context": errorDescription["context"],
+                        "suggestion": suggestion,
+                        "suggestion_position": suggestion_position};
+            jQuery.ajax({
+                url: 'https://api.softcatala.org/sc-languagetool-feedback/v1/log',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+            });
+          }
+      },
+       
       _removeWords : function(w) 
       {
          var ed = this.editor, dom = ed.dom, se = ed.selection, b = se.getBookmark();
@@ -599,11 +660,11 @@ AtDCore.prototype.isIE = function() {
          se.moveToBookmark(b);
       },
 
-      _removeWordsByRuleId : function(ruleId) 
+      _removeWordsByRuleId : function(ruleId, coveredText)
       {
          var ed = this.editor, dom = ed.dom, se = ed.selection, b = se.getBookmark();
 
-         ed.core.removeWordsByRuleId(undefined, ruleId);
+         ed.core.removeWordsByRuleId(undefined, ruleId, coveredText);
 
          /* force a rebuild of the DOM... even though the right elements are stripped, the DOM is still organized
             as if the span were there and this breaks my code */
@@ -630,6 +691,11 @@ AtDCore.prototype.isIE = function() {
        
       _showMenu : function(ed, e) 
       {
+        
+         if (e.which == 3) {
+            // ignore right mouse button
+            return;
+         }
          var t = this, ed = t.editor, m = t._menu, p1, dom = ed.dom, vp = dom.getViewPort(ed.getWin());
          var plugin = this;
 
@@ -662,6 +728,10 @@ AtDCore.prototype.isIE = function() {
 
             /* find the correct suggestions object */
             var errorDescription = ed.core.findSuggestion(e.target);
+            var ruleId = errorDescription["id"];
+            var lang = plugin.editor.getParam('languagetool_i18n_current_lang')();
+
+            t._logUserEvents('OpenError', errorDescription, "", -1);
 
             if (errorDescription == undefined)
             {
@@ -683,12 +753,19 @@ AtDCore.prototype.isIE = function() {
                   (function(sugg)
                    {
                       var iTmp = i;
+                      var titlesugg = sugg;
+                      if (sugg.startsWith("<REMOVE>")) {
+                           titlesugg = '<span style="text-decoration-line: line-through;">&nbsp;'+sugg.slice(8)+'&nbsp;</span>';
+                           sugg = "";
+                       }
+
                       m.add({
-                         title   : sugg, 
+                         title   : titlesugg, 
                          onclick : function() 
                          {
                             ed.core.applySuggestion(e.target, sugg);
-                            t._serverLog('AcceptCorrection', errorDescription, sugg, iTmp);
+                            //t._trackEvent('AcceptCorrection', lang, ruleId);
+                            t._logUserEvents('AcceptCorrection', errorDescription, sugg, iTmp);
                             t._checkDone();
                          }
                       });
@@ -698,12 +775,20 @@ AtDCore.prototype.isIE = function() {
                m.addSeparator();
             }
              
-            var lang = plugin.editor.getParam('languagetool_i18n_current_lang')();
             var explainText = plugin.editor.getParam('languagetool_i18n_explain')[lang] || "Explain...";
-            var ignoreThisText = plugin.editor.getParam('languagetool_i18n_ignore_once')[lang] || "Ignore this error";
-            var ruleImplementation = "Rule implementation";
+            var ignoreThisText = plugin.editor.getParam('languagetool_i18n_ignore_once')[lang] || "Ignore this type of error";
+            var editManually = plugin.editor.getParam('languagetool_i18n_edit_manually')[lang] || "Edit manually";
+            var ruleExamples = "Examples...";
+            if (plugin.editor.getParam('languagetool_i18n_rule_examples')) {
+              ruleExamples = plugin.editor.getParam('languagetool_i18n_rule_examples')[lang] || "Examples...";
+            }
+            var noRuleExamples = "Sorry, no examples found for this rule.";
+            if (plugin.editor.getParam('languagetool_i18n_rule_no_examples')) {
+              noRuleExamples = plugin.editor.getParam('languagetool_i18n_rule_no_examples')[lang] || "Sorry, no examples found for this rule.";
+            }
+            var ruleImplementation = "Rule implementation...";
             if (plugin.editor.getParam('languagetool_i18n_rule_implementation')) {
-              ruleImplementation = plugin.editor.getParam('languagetool_i18n_rule_implementation')[lang] || "Rule implementation";
+              ruleImplementation = plugin.editor.getParam('languagetool_i18n_rule_implementation')[lang] || "Rule implementation...";
             }
             var suggestWord = "Suggest word for dictionary...";
             if (plugin.editor.getParam('languagetool_i18n_suggest_word')) {
@@ -713,8 +798,9 @@ AtDCore.prototype.isIE = function() {
             if (plugin.editor.getParam('languagetool_i18n_suggest_word_url')) {
               suggestWordUrl = plugin.editor.getParam('languagetool_i18n_suggest_word_url')[lang];
             }
-            var ruleId = errorDescription["id"];
-            var isSpellingRule = ruleId.indexOf("MORFOLOGIK_RULE") != -1 || ruleId.indexOf("SPELLER_RULE") != -1;
+            var isSpellingRule = ruleId.indexOf("MORFOLOGIK_RULE") != -1 || ruleId.indexOf("SPELLER_RULE") != -1 ||
+                                 ruleId.indexOf("HUNSPELL_NO_SUGGEST_RULE") != -1 || ruleId.indexOf("HUNSPELL_RULE") != -1;
+
             if (suggestWord && suggestWordUrl && isSpellingRule) {
               var newUrl = suggestWordUrl.replace(/{word}/, encodeURIComponent(errorDescription['coveredtext']));
               (function(url)
@@ -727,8 +813,6 @@ AtDCore.prototype.isIE = function() {
               m.addSeparator();
             }
 
-            //var ignoreThisKindOfErrorText = plugin.editor.getParam('languagetool_i18n_ignore_all')[lang] || "Ignore this kind of error";
-            
             if (errorDescription != undefined && errorDescription["moreinfo"] != null)
             {
                (function(url)
@@ -742,49 +826,106 @@ AtDCore.prototype.isIE = function() {
             }
 
             m.add({
+               title : editManually,
+               onclick : function() 
+               {
+                  dom.remove(e.target, 1);
+                  t._logUserEvents('EditManually', errorDescription, '', -1);
+                  t._checkDone();
+               }
+            });
+
+            m.add({
                title : ignoreThisText,
                onclick : function() 
                {
                   dom.remove(e.target, 1);
-                  t._serverLog('IgnoreRule', errorDescription, '', -1);
+                  t._logUserEvents('IgnoreRule', errorDescription, '', -1);
                   t._checkDone();
                }
             });
-	         /*
-		       var langCode = lang; //$('#lang').val();
+
+             var langCode = jQuery('#lang').val();
+             var subLangCode = jQuery('#subLang').val();
+             if (subLangCode) {
+                 langCode = langCode.replace(/-.*/, "") + "-" + subLangCode;
+             }
             // NOTE: this link won't work (as of March 2014) for false friend rules:
             var ruleUrl = "http://community.languagetool.org/rule/show/" +
               encodeURI(errorDescription["id"]) + "?";
-            if (errorDescription["subid"] && errorDescription["subid"] != 'null') {
+            if (errorDescription["subid"] && errorDescription["subid"] !== 'null' && errorDescription["subid"] !== "undefined") {
               ruleUrl += "subId=" + encodeURI(errorDescription["subid"]) + "&";
             }
             ruleUrl += "lang=" + encodeURI(langCode);
-            m.add({
-               title : ruleImplementation,
-               onclick : function() { window.open(ruleUrl, '_blank'); }
-	              });
-		          */
-            /*m.add({
-              title : ignoreThisKindOfErrorText,
-              onclick : function() 
-              {
-                 var surrogate = e.target.getAttribute(plugin.editor.core.surrogateAttribute);
-                 var ruleId = plugin.editor.core.getSurrogatePart(surrogate, 'id');
-                 t._removeWordsByRuleId(ruleId);
-                 t._checkDone();
-              }
-           });*/
+            /*var isLTServer = window.location.href.indexOf("languagetool.org") !== -1 || window.location.href.indexOf("languagetool.localhost") !== -1;  // will only work for lt.org because
+            if (isLTServer && errorDescription["id"].indexOf("MORFOLOGIK_") !== 0 && errorDescription["id"] !== "HUNSPELL_NO_SUGGEST_RULE") {  // no examples available for spell checking rules
+                m.addSeparator();
+                m.add({
+                    title : ruleExamples,
+                    onclick : function() {
+                        plugin.editor.setProgressState(1);
+                        jQuery.getJSON("/online-check/tiny_mce/plugins/atd-tinymce/server/rule-proxy.php?lang="
+                            + encodeURI(langCode) +"&ruleId=" + errorDescription["id"],
+                            function(data) {
+                                var ruleHtml = "";
+                                var exampleCount = 0;
+                                jQuery.each(data['results'], function(key, val) {
+                                    if (val.sentence && val.status === 'incorrect' && exampleCount < 5) {
+                                        ruleHtml += "<span class='example'>";
+                                        ruleHtml += "<img src='/images/cancel.png'>&nbsp;" +
+                                            val.sentence.replace(/<marker>(.*?)<\/marker>/, "<span class='error'>$1</span>") + "<br>";
+                                        // if there are more corrections we cannot be sure they're all good, so don't show any:
+                                        if (val.corrections && val.corrections.length === 1 && val.corrections[0] !== '') {
+                                            var escapedCorr = jQuery('<div/>').text(val.corrections[0]).html();
+                                            ruleHtml += "<img src='/images/check.png'>&nbsp;";
+                                            ruleHtml += val.sentence.replace(/<marker>(.*?)<\/marker>/, escapedCorr) + "<br>";
+                                        }
+                                        ruleHtml += "</span>";
+                                        ruleHtml += "<br>";
+                                        exampleCount++;
+                                    }
+                                });
+                                if (exampleCount === 0) {
+                                    ruleHtml += "<p>" + noRuleExamples + "</p>";
+                                    t._trackEvent('ShowExamples', 'NoExamples', ruleId);
+                                }
+                                ruleHtml += "<p><a target='_lt_rule_details' href='" + ruleUrl + "'>" + ruleImplementation + "</a></p>";
+                                var $dialog = jQuery("#dialog");
+                                $dialog.html(ruleHtml);
+                                $dialog.dialog("open");
+                            }).fail(function(e) {
+                                var $dialog = jQuery("#dialog");
+                                $dialog.html("Sorry, could not get rules. Server returned error code " + e.status + ".");
+                                $dialog.dialog("open");
+                                t._trackEvent('ShowExamples', 'ServerError');
+                            }).always(function() {
+                                plugin.editor.setProgressState(0);
+                                t._trackEvent('ShowExamples', 'ShowExampleSentences', ruleId);
+                            });
+                    }
+                });
+            }*/
 
            /* show the menu please */
            ed.selection.select(e.target);
            p1 = dom.getPos(e.target);
            var xPos = p1.x;
-           m.showMenu(xPos, p1.y + e.target.offsetHeight - vp.y);
+
+           // moves popup a bit down to not overlap text:
+           //TODO: why is this needed? why does the text (tinyMCE content) have a slightly lower start position in Firefox?
+           var posWorkaround = 0;
+           if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+             posWorkaround = 10;
+           } else {
+             posWorkaround = 2;
+           }
+           
+           m.showMenu(xPos, p1.y + e.target.offsetHeight - vp.y + posWorkaround);
            this.menuVisible =  true;
-           var menuDiv = $('#menu_checktext_spellcheckermenu_co');
+           var menuDiv = jQuery('#menu_checktext_spellcheckermenu_co');
            if (menuDiv) {
                var menuWidth = menuDiv.width();
-               var textBoxWidth = $('#checktextpara').width();  // not sure why we cannot directly use the textarea's width
+               var textBoxWidth = jQuery('#checktextpara').width();  // not sure why we cannot directly use the textarea's width
                if (xPos + menuWidth > textBoxWidth) {
                    // menu runs out of screen, move it to the left
                    var diff = xPos + menuWidth - textBoxWidth;
@@ -840,98 +981,33 @@ AtDCore.prototype.isIE = function() {
          plugin.editor.nodeChanged();
       },
 
-      sendRequest : function(file, data, languageCode, catOptions, success)
+      sendRequest : function(file, data, languageCode, userOptions, success)
       {
          var url = this.editor.getParam("languagetool_rpc_url", "{backend}");
          var plugin = this;
-				 /*alert(data);*/
+
          if (url == '{backend}') 
          {
             this.editor.setProgressState(0);
+            document.checkform._action_checkText.disabled = false;
             alert('Please specify: languagetool_rpc_url');
             return;
          }
-         
-          //Catalan options
-          var enable="";
-          var disable="";
-          if (catOptions.indexOf("formes_generals")>=0)
-	  {
-	      enable = "EXIGEIX_VERBS_CENTRAL,EXIGEIX_POSSESSIUS_V,EVITA_PRONOMS_VALENCIANS";
-	      disable = "EXIGEIX_VERBS_VALENCIANS,EXIGEIX_VERBS_BALEARS";
-	  }
-	  else if (catOptions.indexOf("formes_balears")>=0)
-	  {
-	      enable = "EXIGEIX_VERBS_BALEARS,EXIGEIX_POSSESSIUS_V,EVITA_PRONOMS_VALENCIANS";
-	      disable = "EXIGEIX_VERBS_CENTRAL,CA_SIMPLE_REPLACE_BALEARIC";
-	  }
-	  else if (catOptions.indexOf("formes_valencianes")>=0)
-	  {
-	      enable = "EXIGEIX_VERBS_VALENCIANS,EXIGEIX_POSSESSIUS_U";
-	      disable = "EXIGEIX_VERBS_CENTRAL,EVITA_DEMOSTRATIUS_EIXE,EXIGEIX_POSSESSIUS_V";
-	      
-	      //opcions dins de les formes valencianes
-	      if (catOptions.indexOf("accentuacio_general")>=0)
-	      {
-		  disable = disable + ",EXIGEIX_ACCENTUACIO_VALENCIANA";
-		  enable = enable + ",EXIGEIX_ACCENTUACIO_GENERAL";
-	      };
-	      if (catOptions.indexOf("incoatius_eix")>=0)
-	      {
-		  enable = enable + ",EXIGEIX_VERBS_EIX";
-		  disable = disable + ",EXIGEIX_VERBS_IX";
-	      }
-	      else
-	      {
-		  enable = enable + ",EXIGEIX_VERBS_IX";
-		  disable = disable + ",EXIGEIX_VERBS_EIX";
-	      };
-	      if (catOptions.indexOf("incoatius_isc")>=0)
-	      {
-		  enable = enable + ",EXIGEIX_VERBS_ISC";
-		  disable = disable + ",EXIGEIX_VERBS_ESC";
-	      } 
-	      else
-	      {
-		  enable = enable + ",EXIGEIX_VERBS_ESC";
-		  disable = disable + ",EXIGEIX_VERBS_ISC";
-	      };
-	      if (catOptions.indexOf("demostratius_aquest")>=0)
-	      {
-		  enable = enable + ",EVITA_DEMOSTRATIUS_ESTE";
-		  disable = disable + ",EVITA_DEMOSTRATIUS_AQUEST";
-	      }
-	      else
-	      {
-		  enable = enable + ",EVITA_DEMOSTRATIUS_AQUEST,EVITA_DEMOSTRATIUS_AQUEIX";
-		  disable = disable + ",EVITA_DEMOSTRATIUS_ESTE";
-	      };
-	  }
-	  //opcions per a totes les variants territorials
-	  if (catOptions.indexOf("SE_DAVANT_SC")>=0)
-	  {
-	      enable = enable + ",SE_DAVANT_SC";
-	  }
-	  else
-	  {
-	      disable = disable + ",SE_DAVANT_SC";
-	  };
-	  if (catOptions.indexOf("CA_UNPAIRED_QUESTION")>=0)
-	  {
-	      enable = enable + ",CA_UNPAIRED_QUESTION";
-	  }
-	  else
-	  {
-	      disable = disable + ",CA_UNPAIRED_QUESTION";
-	  };
-	  //End of Catalan options
 
-	  
-	  var postData = "text=" + encodeURI(data).replace(/&/g, '%26').replace(/\+/g, '%2B')
-              + "&language=" + encodeURI(languageCode)
-              + "&enabledRules=" + enable 
-              + "&disabledRules=WHITESPACE_RULE," + disable;
-          
+         var langParam = "";
+         if (languageCode === "auto") {
+             langParam = "&language=auto";
+         } else {
+             langParam = "&language=" + encodeURI(languageCode);
+         }
+
+         var t = this;
+         // There's a bug somewhere in AtDCore.prototype.markMyWords which makes
+         // multiple spaces vanish - thus disable that rule to avoid confusion: WHITESPACE_RULE,
+         var postData = userOptions + "&" +
+             "allowIncompleteResults=true&" + 
+             "text=" + encodeURI(data).replace(/&/g, '%26').replace(/\+/g, '%2B').replace(/&gt;/g, '%3E') + langParam;
+
          jQuery.ajax({
             url:   url,
             type:  "POST",
@@ -969,20 +1045,26 @@ AtDCore.prototype.isIE = function() {
                 }, 500);
             }
          });
-   
-          
-          /*
-        tinymce.util.XHR.send({
-            url          : url, 
-            content_type : 'text',
+
+         /* this causes an OPTIONS request to be send as a preflight - LT server doesn't support that,
+         thus we're using jQuery.ajax() instead
+         tinymce.util.XHR.send({
+            url          : url,
+            content_type : 'text/xml',
             type         : "POST",
-            data         : postData,
+            data         : "text=" + encodeURI(data).replace(/&/g, '%26').replace(/\+/g, '%2B')
+                           + langParam
+                           // there's a bug somewhere in AtDCore.prototype.markMyWords which makes
+                           // multiple spaces vanish - thus disable that rule to avoid confusion:
+                           + "&disabled=WHITESPACE_RULE",
             async        : true,
             success      : success,
             error        : function( type, req, o )
             {
                plugin.editor.setProgressState(0);
-               alert("Could not send request to\n" + o.url + "\nError: " + type + "\nStatus code: " + req.status + "\nPlease make sure your network connection works."); 
+               document.checkform._action_checkText.disabled = false;
+               var errorMessage = "<div id='severeError'>Error: Could not send request to\n" + o.url + "\nError: " + type + "\nStatus code: " + req.status + "\nPlease make sure your network connection works.</div>";
+               jQuery('#feedbackErrorMessage').html(errorMessage);
             }
          });*/
       }
