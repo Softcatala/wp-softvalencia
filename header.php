@@ -29,7 +29,7 @@
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery-latest.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/base.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cycle.js"></script>
-<script type="text/javascript" src="https://www.softvalencia.org/lib/corrector/cpaint/cpaint2.inc.compressed.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/cpaint2.inc.compressed.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/corrector/spell_checker.js"></script>
 
 <?php if(is_traductor()): ?>

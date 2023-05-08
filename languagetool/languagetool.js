@@ -103,7 +103,7 @@ var SC_COOKIE = 'sc-languagetool';
     //languagetool_rpc_url                 : "/languagetool/online-check/tiny_mce/plugins/atd-tinymce/server/proxy.php?url=",
     languagetool_rpc_url: "https://api.softcatala.org/corrector/v2/check",
     /* edit this file to customize how LanguageTool shows errors: */
-    languagetool_css_url: "/languagetool/online-check/tiny_mce/plugins/atd-tinymce/css/content.css",
+    languagetool_css_url: "https://www.softvalencia.org/wp-content/themes/wp-softvalencia/languagetool/online-check/tiny_mce/plugins/atd-tinymce/css/content.css",
     /* this stuff is a matter of preference: */
     height: 300,
     theme: "advanced",
