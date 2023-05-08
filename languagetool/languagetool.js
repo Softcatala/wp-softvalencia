@@ -59,41 +59,49 @@ var SC_COOKIE = 'sc-languagetool';
 
     /* translations: */
     languagetool_i18n_no_errors: {
-       'ca': 'No s\'ha trobat cap error',
-       'ca-ES-valencia': 'No s\'ha trobat cap error'
+      // "No errors were found.":
+      "ca": "No s\'ha trobat cap error",
+      'ca-ES-valencia': 'No s\'ha trobat cap error'
     },
     languagetool_i18n_explain: {
-      // "Explain..." - shown if there's an URL with a more detailed description:
+      // "Explain..." - shown if there is an URL with a detailed description:
       'ca': 'Més informació…',
       'ca-ES-valencia': 'Més informació…'
     },
     languagetool_i18n_ignore_once: {
-      'ca': 'És un fals positiu',
-      'ca-ES-valencia': 'És un fals positiu'
+      // "Ignore this error":
+      'ca': 'Crec que no hi ha error',
+      'ca-ES-valencia': 'Crec que no hi ha error'
     },
+    languagetool_i18n_edit_manually: {
+        'ca': 'Edita manualment',
+        'ca-ES-valencia': 'Edita manualment'
+      },
     languagetool_i18n_ignore_all: {
+      // "Ignore this kind of error":
       'ca': 'Ignora aquesta classe d\'errors',
       'ca-ES-valencia': 'Ignora aquesta classe d\'errors'
     },
-    languagetool_i18n_rule_implementation :
-    {
+    languagetool_i18n_rule_implementation: {
       // "Rule implementation":
-	'ca': 'Informació sobre la regla...',
-	'ca-ES-valencia': 'Informació sobre la regla...',
+      'ca': 'Informació sobre la regla...',
+      'ca-ES-valencia': 'Informació sobre la regla...',
     },
-    languagetool_i18n_suggest_word :
-    {
-    // "Suggest word for dictionary...":
-    // *** Also set languagetool_i18n_suggest_word_url below if you set this ***
-	'ca': 'Suggereix una paraula per al diccionari...',
-	'ca-ES-valencia': 'Suggereix una paraula per al diccionari...'
+    languagetool_i18n_edit_manually: {
+      'ca': 'Edita manualment',
+      'ca-ES-valencia': 'Edita manualment'
     },
-    languagetool_i18n_suggest_word_url :
-    {
-    // "Suggest word for dictionary...":
-	'ca': 'http://community.languagetool.org/suggestion?word={word}&lang=ca',
-	'ca-ES-valencia': 'http://community.languagetool.org/suggestion?word={word}&lang=ca'
-     },
+    languagetool_i18n_suggest_word: {
+      // "Suggest word for dictionary...": 
+      // *** Also set languagetool_i18n_suggest_word_url below if you set this ***
+      'ca': 'Suggereix una paraula per al diccionari...',
+      'ca-ES-valencia': 'Suggereix una paraula per al diccionari...'
+    },
+    languagetool_i18n_suggest_word_url: {
+      // "Suggest word for dictionary...":
+      'ca': 'http://community.languagetool.org/suggestion?word={word}&lang=ca',
+      'ca-ES-valencia': 'http://community.languagetool.org/suggestion?word={word}&lang=ca'
+    },
 
 
     languagetool_i18n_current_lang: function() {
