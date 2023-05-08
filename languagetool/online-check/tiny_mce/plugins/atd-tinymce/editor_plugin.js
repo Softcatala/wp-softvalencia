@@ -617,7 +617,7 @@ AtDCore.prototype.isIE = function() {
 
      _logUserEvents : function(type, errorDescription, suggestion, suggestion_position)
       {
-        sc_settings = sc_settings || false
+        /*
         if (sc_settings && sc_settings.log_corrector_user_events) {
             var SC_COOKIE_UUID = 'sc-languagetool-feedback-uuid';
 
@@ -646,6 +646,7 @@ AtDCore.prototype.isIE = function() {
                 dataType: 'json',
             });
           }
+        */
       },
        
       _removeWords : function(w) 
