@@ -467,18 +467,49 @@
 					url = url + "&enabled="+enable+"&disabled="+disable;
 				 //End of Catalan options
    
-        /*
+         var postData = userOptions + "&" +
+             "allowIncompleteResults=true&" + 
+             "text=" + encodeURI(data).replace(/&/g, '%26').replace(/\+/g, '%2B').replace(/&gt;/g, '%3E') + langParam;
+
          jQuery.ajax({
-            url:   url + "/" + file,
+            url:   url,
             type:  "POST",
-            data:  "text=" + encodeURI(data).replace(/&/g, '%26') + "&language=" + encodeURI(languageCode),
+            data:  postData,
             success: success,
             error: function(jqXHR, textStatus, errorThrown) {
-               plugin.editor.setProgressState(0);
-               alert("Could not send request to\n" + url + "\nError: " + textStatus + "\n" + errorThrown + "\nPlease make sure your network connection works."); 
+                // try again
+                //t._serverLog("Error on first try, trying again...");
+                setTimeout(function() {
+                    jQuery.ajax({
+                        url:   url,
+                        type:  "POST",
+                        data:  postData,
+                        success: success,
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            plugin.editor.setProgressState(0);
+                            document.checkform._action_checkText.disabled = false;
+                            var errorText = jqXHR.responseText;
+                            //if (!errorText) {
+                            errorText = "Error: el servei no respon. Proveu més tard. " 
+                              + "Consulteu: "
+                              + "<a href=\"https://www.softcatala.org/tutorials/configuracio-dels-navegadors/problemes-amb-els-certificats-per-a-accedir-a-la-web-en-mode-segur/\">problemes amb els certificats</a> "
+                              + " i <a href=\"https://www.softcatala.org/wiki/Projectes/LanguageTool/PMF\">preguntes més freqüents</a>.";
+                            //}
+                            if (data.length > maxTextLength) {
+                                // Somehow, the error code 413 is lost in Apache, so we show that error here.
+                                // This unfortunately means that the limit needs to be configured in the server *and* here.
+                                errorText = "Error: el text és massa llarg (" + data.length + " caràcters). Màxim: " + maxTextLength + " caràcters.";
+                            }
+                            jQuery('#feedbackErrorMessage').html("<div class='severeError'>" + errorText + "</div>");
+                            //t._trackEvent('CheckError', 'ErrorWithException', errorText);
+                            //t._serverLog(errorText + " (second try)");
+                        }
+                    });
+                }, 500);
             }
-         });*/
+         });
    
+         /*
          tinymce.util.XHR.send({
             url          : url + "/" + file,
             content_type : 'text/xml',
@@ -493,6 +524,7 @@
                alert("Could not send request to\n" + o.url + "\nError: " + type + "\nStatus code: " + req.status + "\nPlease make sure your network connection works."); 
             }
          });
+         */
       }
    });
 
