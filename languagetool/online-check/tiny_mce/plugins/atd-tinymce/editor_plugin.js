@@ -60,6 +60,7 @@ AtDCore.prototype.processJSON = function(responseJSON) {
     var incompleteResults = json.warnings && json.warnings.incompleteResults;
     this.suggestions = [];
     for (var key in json.matches) {
+        if (key == '______array') continue
         var match = json.matches[key];
         var suggestion = {};
         // I didn't manage to make the CSS break the text, so we add breaks with Javascript:
