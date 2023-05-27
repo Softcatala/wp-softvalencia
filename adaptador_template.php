@@ -47,18 +47,18 @@ Template Name: Adaptador
 
 <script type="text/javascript">
 
-$('#text').keyup(function() {
-    var keyed = $(this).val().replace(/\n/g, '<br/>');
+jQuery('#text').keyup(function() {
+    var keyed = jQuery(this).val().replace(/\n/g, '<br/>');
 
     loadUrl = 'https://api.softcatala.org/adaptador/v1/valencia';
 
 	t = urlencode(keyed)
 
-    $.get(  
+    jQuery.get(  
         loadUrl + "?original=" + keyed,
         function(data){  
-            $("#text_h3").show();
-            $("#text_adaptat").html('<div class="text_adaptat">'+data.adapted+'</div>');  
+            jQuery("#text_h3").show();
+            jQuery("#text_adaptat").html('<div class="text_adaptat">'+data.adapted+'</div>');  
         },  
         "json"  
     );
