@@ -133,27 +133,87 @@ var SC_COOKIE = 'sc-languagetool';
       var errorMsg = "Heu superat el l\u00EDmit de 50.000 car\u00E0cters.";
       alert(errorMsg);
     } else {
-      var langCode = document.checkform.lang.value;
-      //formes: generals/valencianes/balears
-      var catOptions = $("input[name=formes]:checked").val();
-      //opcions dins formes valencianes
-      if (catOptions == "formes_valencianes") {
-        langCode = "ca-ES-valencia";
-        catOptions = catOptions + "," + $("input[name=accentuacio]:checked")
-          .val() + "," + $("input[name=incoatius]:checked").val() + "," + $(
-            "input[name=incoatius2]:checked").val() + "," + $(
-            "input[name=demostratius]:checked").val();
+
+      var disabledRules = [];
+      var enabledRules = [];
+      var disabledCategories = [];
+
+      // opcions general (ca-ES)
+      var ca_disabledRules = [];
+      var ca_enabledRules = []; 
+      var ca_disabledCategories = []; 
+
+      //Opcions de tipografia
+      var typo_enabledRules = [];
+      var typo_disabledRules = [];
+      var typo_disabledCategories = [];
+
+      // deshabilita algunes regles del mode "picky"
+      typo_disabledRules.push("ESPAI_FI");
+      typo_disabledRules.push("ADVERBIS_MENT");
+      typo_disabledRules.push("TOO_LONG_SENTENCE");
+
+      /* incoatius -eix/-ix */
+      if (jQuery("input[name=incoatius]:checked").val() == "incoatius_ix") {
+          enabledRules.push("EXIGEIX_VERBS_IX");
+          disabledRules.push("EXIGEIX_VERBS_EIX");
+      };
+      /* incoatius -esc/-isc */
+      if (jQuery("input[name=incoatius2]:checked").val() == "incoatius_esc") {
+          enabledRules.push("EXIGEIX_VERBS_ESC");
+          disabledRules.push("EXIGEIX_VERBS_ISC");
+      };
+      /* demostratius aquest/este */
+      if (jQuery("input[name=demostratius]:checked").val() == "demostratius_este") {
+          enabledRules.push("EVITA_DEMOSTRATIUS_AQUEST");
+          disabledRules.push("EVITA_DEMOSTRATIUS_ESTE");
+      };
+      /* accentuació café /cafè */
+      if (jQuery("input[name=accentuacio]:checked").val() == "accentuacio_general") {
+          enabledRules.push("EXIGEIX_ACCENTUACIO_GENERAL");
+          disabledRules.push("EXIGEIX_ACCENTUACIO_VALENCIANA");
+      };
+
+      if (jQuery("input[name=SE_DAVANT_SC]:checked").val()) {
+          typo_disabledRules.push("SE_DAVANT_SC");
       }
-      // opcions per a les tres variants
-      catOptions = catOptions + "," + $("input[name=SE_DAVANT_SC]:checked")
-        .val() + "," + $("input[name=CA_UNPAIRED_QUESTION]:checked").val();
+      
+
+      const langCode = "ca-ES-valencia";
+
+      typo_disabledRules.push("WHITESPACE_RULE"); //disable always WHITESPACE_RULE 
+
+
+      ca_enabledRules.push("EXIGEIX_VERBS_VALENCIANS","EXIGEIX_POSSESSIUS_U");
+      ca_disabledRules.push("EXIGEIX_VERBS_CENTRAL","EVITA_DEMOSTRATIUS_EIXE","EXIGEIX_POSSESSIUS_V");
+      pushArray(ca_enabledRules, enabledRules);
+      pushArray(ca_disabledRules, disabledRules);
+      pushArray(ca_disabledCategories, disabledCategories);
+
+      pushArray(ca_enabledRules, typo_enabledRules);
+      pushArray(ca_disabledRules, typo_disabledRules);
+      pushArray(ca_disabledCategories, typo_disabledCategories);
+      pushArray(enabledRules, typo_enabledRules);
+      pushArray(disabledRules, typo_disabledRules);
+      pushArray(disabledCategories, typo_disabledCategories);
 
       save_cookie_status();
 
-      tinyMCE.activeEditor.execCommand('mceWritingImprovementTool',
-        langCode, catOptions);
+      const userOptions="&level=picky";
+
+      if (disabledRules.join()) { userOptions += "&disabledRules=" + disabledRules.join(); }
+      if (enabledRules.join()) { userOptions += "&enabledRules=" + enabledRules.join(); }
+      if (disabledCategories.join()) { userOptions += "&disabledCategories=" + disabledCategories.join(); }
+
+      tinyMCE.activeEditor.execCommand('mceWritingImprovementTool', langCode, userOptions);
     }
   }
+
+  
+function pushArray(arr, arr2) {
+    arr.push.apply(arr, arr2);
+}
+
 
   function read_cookie_status() {
     if ($.getCookie('sc-languagetool')) {
