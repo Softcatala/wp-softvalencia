@@ -199,7 +199,7 @@ var SC_COOKIE = 'sc-languagetool';
 
       save_cookie_status();
 
-      const userOptions="&level=picky";
+      let userOptions="&level=picky";
 
       if (disabledRules.join()) { userOptions += "&disabledRules=" + disabledRules.join(); }
       if (enabledRules.join()) { userOptions += "&enabledRules=" + enabledRules.join(); }
