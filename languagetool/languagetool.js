@@ -167,6 +167,9 @@ var SC_COOKIE = 'sc-languagetool';
       if (jQuery("input[name=demostratius]:checked").val() == "demostratius_este") {
           enabledRules.push("EVITA_DEMOSTRATIUS_AQUEST");
           disabledRules.push("EVITA_DEMOSTRATIUS_ESTE");
+      } else {
+	  enabledRules.push("EVITA_DEMOSTRATIUS_ESTE");
+          disabledRules.push("EVITA_DEMOSTRATIUS_AQUEST");
       };
       /* accentuació café /cafè */
       if (jQuery("input[name=accentuacio]:checked").val() == "accentuacio_general") {
