@@ -38,7 +38,41 @@ piwikTracker.enableLinkTracking();
 </script><noscript><p><img src="http://stats.softcatala.cat/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
 <!-- End Piwik Tag -->
 
-	
+<script defer data-domain="softvalencia.org" src="https://t.softcatala.org/js/script.js"></script>
+<script>
+
+	function sanitizeLanguage(lang) {
+		if (lang.includes('-')) {
+			return lang.split('-')[0].toLowerCase()
+		}
+		return lang.toLowerCase()
+	}
+
+
+	function getLanguages() {
+		const exactLanguage = navigator.language.toLowerCase()
+		const language =  sanitizeLanguage(navigator.language)
+
+		const languages = {
+			exactLanguage, language
+		}
+
+		let secondLanguage
+		if (navigator.languages.length > 1) {
+			secondLanguage = sanitizeLanguage(navigator.languages[1])
+			languages.secondLanguage = secondLanguage
+		}
+
+		return languages
+	}
+
+	plausible('pageview', {
+	props: {
+		...getLanguages()
+	}
+})</script>
+
+
 	</body>
 
 </html>
