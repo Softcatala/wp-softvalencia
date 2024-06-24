@@ -38,7 +38,7 @@ piwikTracker.enableLinkTracking();
 </script><noscript><p><img src="http://stats.softcatala.cat/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
 <!-- End Piwik Tag -->
 
-<script defer data-domain="softvalencia.org" src="https://t.softcatala.org/js/script.js"></script>
+<script defer data-domain="softvalencia.org" src="https://t.softcatala.org/js/script.manual.pageview-props.js"></script>
 <script>
 
 	function sanitizeLanguage(lang) {
