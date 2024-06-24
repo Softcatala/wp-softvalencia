@@ -66,11 +66,15 @@ piwikTracker.enableLinkTracking();
 		return languages
 	}
 
-	plausible('pageview', {
-	props: {
-		...getLanguages()
+	function sendStats() {
+		if (plausible) {
+			plausible('pageview', { props: { ...getLanguages() } } ) 
+		} else {
+			setTimeout(sendStats, 300);
+		}
+
 	}
-})</script>
+</script>
 
 
 	</body>
