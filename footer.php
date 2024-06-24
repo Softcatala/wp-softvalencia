@@ -67,13 +67,15 @@ piwikTracker.enableLinkTracking();
 	}
 
 	function sendStats() {
-		if (plausible) {
+		if (typeof plausible !== "undefined") {
 			plausible('pageview', { props: { ...getLanguages() } } ) 
 		} else {
 			setTimeout(sendStats, 300);
 		}
 
 	}
+
+	sendStats()
 </script>
 
 
