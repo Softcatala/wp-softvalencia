@@ -51,9 +51,9 @@
 
 			<div class="logo_cap">
                 <?php if (!is_home()): ?>
-                    <a href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></a></div>
+                    <a href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv_dol.png" alt="Softvalencià" title="Softvalencià" /></a></div>
                 <?php else: ?>
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv.png" alt="Softvalencià" title="Softvalencià" /></div>
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/logo_sv_dol.png" alt="Softvalencià" title="Softvalencià" /></div>
                 <?php endif; ?>
 			</div>
 
