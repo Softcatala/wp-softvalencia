@@ -40,7 +40,7 @@
                     echo '</a><br />';
                     
                     $d_curta = get_post_custom_values('descripcio_portada');
-                    if (count($d_curta) > 0) {
+                    if ($d_curta && count($d_curta) > 0) {
                         echo '<small>';
                         echo $d_curta[0];
                         echo '</small></li>';
@@ -67,7 +67,7 @@
                     echo '</a><br /><small>';
                     $d_curta = get_post_custom_values('descripcio_portada');
                     $d_curta = get_post_custom_values('descripcio_portada');
-                    if (count($d_curta) > 0) {
+                    if ($d_curta && count($d_curta) > 0) {
                         echo '<small>';
                         echo $d_curta[0];
                         echo '</small></li>';
@@ -90,7 +90,7 @@
                     the_title();
                     echo '</a><br /><small>';
                     $d_curta = get_post_custom_values('descripcio_portada');
-                    if (count($d_curta) > 0) {
+                    if ($d_curta && count($d_curta) > 0) {
                         echo '<small>';
                         echo $d_curta[0];
                         echo '</small></li>';
