@@ -37,10 +37,16 @@
                     $windows->the_post();
                     echo '<li><a href="', get_permalink(get_the_ID()), '">';
                     the_title();
-                    echo '</a><br /><small>';
+                    echo '</a><br />';
+                    
                     $d_curta = get_post_custom_values('descripcio_portada');
-                    echo $d_curta[0];
-                    echo '</small></li>';
+                    if (count($d_curta) > 0) {
+                        echo '<small>';
+                        echo $d_curta[0];
+                        echo '</small></li>';
+                    } else {
+                        echo '</li>';
+                    }
                 }
                 ?>
 
@@ -60,8 +66,14 @@
                     the_title();
                     echo '</a><br /><small>';
                     $d_curta = get_post_custom_values('descripcio_portada');
-                    echo $d_curta[0];
-                    echo '</small></li>';
+                    $d_curta = get_post_custom_values('descripcio_portada');
+                    if (count($d_curta) > 0) {
+                        echo '<small>';
+                        echo $d_curta[0];
+                        echo '</small></li>';
+                    } else {
+                        echo '</li>';
+                    }
                 }
                 ?>
             </ul>
@@ -78,8 +90,13 @@
                     the_title();
                     echo '</a><br /><small>';
                     $d_curta = get_post_custom_values('descripcio_portada');
-                    echo $d_curta[0];
-                    echo '</small></li>';
+                    if (count($d_curta) > 0) {
+                        echo '<small>';
+                        echo $d_curta[0];
+                        echo '</small></li>';
+                    } else {
+                        echo '</li>';
+                    }
                 }
                 ?>
             </ul>
